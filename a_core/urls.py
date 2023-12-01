@@ -5,6 +5,7 @@ URL configuration for A_CORE project.
 from django.contrib import admin
 from django.urls import path, include
 from a_plot.views import *
+from a_user.views import *
 
 urlpatterns = [
     path("admin/", admin.site.urls),

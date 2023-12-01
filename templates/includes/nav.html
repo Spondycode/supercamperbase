@@ -1,6 +1,14 @@
 <nav class="navbar navbar-expand-md bg-warning navbar-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Logo</a>
+    <a href="{% url 'home' %}">
+      <img
+        class="p-1"
+        width="64"
+        height="64"
+        src="https://img.icons8.com/external-xnimrodx-blue-xnimrodx/64/external-tent-camping-and-outdoor-xnimrodx-blue-xnimrodx.png"
+        alt="external-tent-camping-and-outdoor-xnimrodx-blue-xnimrodx"
+      />
+    </a>
     <button
       class="navbar-toggler"
       type="button"
@@ -10,10 +18,16 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav px-4">
         {% if user.is_authenticated %}
         <li class="nav-item">
-          <a class="nav-link active" href="#">Home</a>
+          <a class="nav-link" href="{% url 'profile_view' %} ">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Edit Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Add Plot</a>
         </li>
         {% else %}
         <li class="nav-item">

@@ -1,3 +1,18 @@
 from django.db import models
+import uuid 
 
-# Create your models here.
+class Plot(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    image = models.URLField(blank=True, null=True)
+    plot = models.CharField(max_length=100)
+    what3words = models.CharField(max_length=300, blank=True, null=True)
+    campsite = models.CharField(max_length=100)
+    country = models.CharField(max_length=100)
+    list_date = models.DateTimeField(auto_now_add=True)
+    owner = models.ForeignKey("auth.User", on_delete=models.CASCADE, related_name="plots")
+    id = models.CharField(max_length=100, default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+
+    def __str__(self):
+        return self.title

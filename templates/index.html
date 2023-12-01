@@ -3,9 +3,60 @@
 
 {% block content %}
 <body>
-    <h1>Home Page for Super Camper</h1>
-</body>
+
+
+    <div class="container-fluid ">
+        <h1 class="text-center mt-2">All the Latest Plots</h1>
+        <div class="row">
+            <div class="col-lg-9 ">
+                <div class="container col-md-10">
+                    <div class="row row-cols-md">
+                        {% for plot in plots %}
+                        <div class="col-md-6">
+                            <div class=" card shadow m-2 p-2">
+                                <h3 class="text-center">{{ plot.title }}</h3>
+                                <p><strong>Description:</strong> {{ plot.description }}</p>
+                                <ul>
+                                    <li><strong>What3Words:</strong> {{ plot.what3words }}</li>
+                                    <li><strong>Campsite:</strong> {{ plot.campsite }}</li>
+                                    <li><strong>Country:</strong> {{ plot.country }}</li>
+                                </ul>
+                                <figure>
+                                    <a href="#"><img class="w-100" src="{{ plot.image }}" alt=""></a>
+                                </figure>
+                                <div class="d-grid gap-3">
+                                    <a class="btn btn-block btn-outline-warning" href="#">Edit Plot Details</a>
+                                    <a class="btn btn-block btn-outline-primary" href="#">View Plot Page</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <!-- Add logic so only the user who created the plot can edit it -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="row row-cols-md">
+                    <div class=" m-2 p-2">
+                        <h3 class="text-center">{{ plot.title }}</h3>
+                        <p><strong>Description:</strong> {{ plot.description }}</p>
+                        <ul>
+                            <li><strong>One</strong> Various bits and bobs</li>
+                            <li><strong>Two:</strong> Information about the site</li>
+                            <li><strong>Three:</strong> Links to Other features on the site</li>
+                        </ul>
+                        <figure>
+                            Advertisement for Mugs stickers whatever camping gear etc
+                        </figure>
+                    </div>
+                </div>
+            </div>
+          </div>
+    </div>
+
+
+
 {% endblock content %}
     
-
+</body>
 </html>
