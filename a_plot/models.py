@@ -1,5 +1,16 @@
 from django.db import models
-import uuid 
+import uuid
+
+class Country(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+    
+    # take care od the plural form of the model name
+    class Meta:
+        verbose_name_plural = "Countries"
+
 
 class Plot(models.Model):
     title = models.CharField(max_length=100)
@@ -9,10 +20,11 @@ class Plot(models.Model):
     plot = models.CharField(max_length=100)
     what3words = models.CharField(max_length=300, blank=True, null=True)
     campsite = models.CharField(max_length=100)
-    country = models.CharField(max_length=100)
+    country = models.ForeignKey(Country, on_delete=models.CASCADE, related_name="plots", blank=True, null=True)
     list_date = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey("auth.User", on_delete=models.CASCADE, related_name="plots")
     id = models.CharField(max_length=100, default=uuid.uuid4, unique=True, primary_key=True, editable=False)
 
     def __str__(self):
         return self.title
+    

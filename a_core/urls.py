@@ -11,4 +11,6 @@ urlpatterns = [
     path("user/", include("a_user.urls")),
     path("", home_view, name="home"),
     path("about/", about_view, name="about"),
+    path("show_plot/<plot_id>/", plot_view, name="show_plot"),
+    path("add_plot/", add_plot_view, name="add_plot"),
 ]
