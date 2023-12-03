@@ -4,24 +4,28 @@
     <div class="row">
         <div class="col-md-8">
             <div class="card shadow m-2 p-2">
-                <h3 class="text-center"><i class="bi bi-emoji-sunglasses text-primary"></i>  {{ plot.title }}</h3>
+                <h3 class="text-center"><i class="bi bi-emoji-sunglasses text-primary"></i> {{ plot.title }}</h3>
                 <p class="text-truncate"><strong>Description:</strong> {{ plot.description }}</p>
                 <ul>
                     <li><strong>Campsite:</strong> {{ plot.campsite }}</li>
                     <li><strong>Price Per Night:</strong> {{ plot.price }}</li>
                     <li><strong>Country:</strong> {{ plot.country }}</li>
-                    
+
                     {% if plot.what3words is not None %}
-                    <p class="p-3">Here is a precise what3words address, made of 3 random words. Every 3 metre square in the world has its own unique what3words address.</p>
+                    <p class="p-3">Here is a precise what3words address, made of 3 random words. Every 3 metre square in
+                        the world has its own unique what3words address.</p>
                     <li><strong>What3Words:</strong> <a href="{{ plot.what3words }}"> Get Directions</a> </li>
                     {% endif %}
-                        
+
 
                 </ul>
                 <figure>
                     <a href="#"><img class="w-100" src="{{ plot.image }}" alt=""></a>
                 </figure>
+                <div class="d-flex gap-2">
                     <a class="btn btn-outline-warning col" href="#">Edit Plot Details</a>
+                    <a class="btn btn-outline-danger col" href="{% url 'delete_plot' plot.id %}">Delete Plot</a>
+                </div>
             </div>
         </div>
 
@@ -29,19 +33,20 @@
             <div class="row row-cols-md">
                 <div class=" m-2 p-2">
                     <h3 class="text-center">SuperCamper Deals</h3>
-                        <li><strong>Stickers: </strong>First 200 sign ups who leave a review for a campsite plot can get a SuperCamper sticker</li>
-                        <li><strong>Two: </strong>Information about the site</li>
-                        <li><strong>Three: </strong>Links to Other features on the site</li>
+                    <li><strong>Stickers: </strong>First 200 sign ups who leave a review for a campsite plot can get a
+                        SuperCamper sticker</li>
+                    <li><strong>Two: </strong>Information about the site</li>
+                    <li><strong>Three: </strong>Links to Other features on the site</li>
                     </ul>
                     <figure>
                         Advertisement for Mugs stickers whatever camping gear etc
                     </figure>
                 </div>
             </div>
-        </div> 
+        </div>
     </div>
 </div>
 
 
 
- {% endblock content %}
+{% endblock content %}

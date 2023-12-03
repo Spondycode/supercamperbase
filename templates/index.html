@@ -2,9 +2,10 @@
 
 
 {% block content %}
+
 <body>
     <div class="container-fluid ">
-        
+
         <div class="row">
             <div class="col-lg-9 ">
                 <div class="container col-md-10">
@@ -12,7 +13,8 @@
                         {% for plot in plots %}
                         <div class="col-md-6">
                             <div class=" card shadow m-2 p-2">
-                                <h3 class="text-center"><i class="bi bi-emoji-sunglasses text-primary"></i>  {{ plot.title }}</h3>
+                                <h3 class="text-center"><i class="bi bi-emoji-sunglasses text-primary"></i> 
+                                    {{  plot.title }}</h3>
                                 <p class="text-truncate"><strong>Description:</strong> {{ plot.description }}</p>
                                 <ul>
                                     <li><strong>Campsite:</strong> {{ plot.campsite }}</li>
@@ -21,10 +23,8 @@
                                 <figure>
                                     <a href="#"><img class="w-100" src="{{ plot.image }}" alt=""></a>
                                 </figure>
-                                <div class="d-flex text-center gap-3">
-                                    <a class="btn btn-outline-warning col" href="#">Edit Plot Details</a>
-                                    <a class="btn btn-outline-primary col" href="{% url 'show_plot' plot.id %}">View Plot Page</a>
-                                </div>
+                                <a class="btn btn-outline-primary col" href="{% url 'show_plot' plot.id %}">View Plot
+                                    Page</a>
                             </div>
                         </div>
                         {% endfor %}
@@ -36,11 +36,15 @@
                 <div class="row row-cols-md">
                     <div class=" m-2 p-2">
                         <h3 class="text-center">{{ plot.title }}</h3>
-                        <p><strong>Languages:</strong>My mother tongue is English. While I can communicate well in Spanish and German, it will increase the complexity of the Super Camper site to add other languages.</p>
+                        <p><strong>Languages:</strong>My mother tongue is English. While I can communicate well in
+                            Spanish and German, it will increase the complexity of the Super Camper site to add other
+                            languages.</p>
                         <p>Just remember that on most browsers now you have a button to translate everything.</p>
-                        <p>Please leave your review in your own language. Don't feel you have to translate, just let the browser technology do it for you.</p>
+                        <p>Please leave your review in your own language. Don't feel you have to translate, just let the
+                            browser technology do it for you.</p>
                         <ul>
-                            <li><strong>Stickers: </strong>First 200 sign ups who leave a review for a campsite plot can get a SuperCamper sticker</li>
+                            <li><strong>Stickers: </strong>First 200 sign ups who leave a review for a campsite plot can
+                                get a SuperCamper sticker</li>
                             <li><strong>Two: </strong>Information about the site</li>
                             <li><strong>Three: </strong>Links to Other features on the site</li>
                         </ul>
@@ -50,16 +54,17 @@
                     </div>
                 </div>
             </div>
-          </div>
+        </div>
     </div>
 
-<br>
-<br>
-{% include 'includes/showcase.html' %}
+    <br>
+    <br>
+    {% include 'includes/showcase.html' %}
 
-{% include 'includes/questions.html' %}
+    {% include 'includes/questions.html' %}
 
-{% endblock content %}
-    
+    {% endblock content %}
+
 </body>
+
 </html>

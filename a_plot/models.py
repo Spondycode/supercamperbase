@@ -18,7 +18,7 @@ class Plot(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     image = models.URLField(blank=True, null=True)
     plot = models.CharField(max_length=100)
-    what3words = models.CharField(max_length=300, blank=True, null=True)
+    what3words = models.URLField(blank=True, null=True)
     campsite = models.CharField(max_length=100)
     country = models.ForeignKey(Country, on_delete=models.CASCADE, related_name="plots", blank=True, null=True)
     list_date = models.DateTimeField(auto_now_add=True)
@@ -27,4 +27,7 @@ class Plot(models.Model):
 
     def __str__(self):
         return self.title
+    
+    class Meta:
+        ordering = ["-list_date"]
     
