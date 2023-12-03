@@ -1,0 +1,16 @@
+{% extends 'base2.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+    <h1>Edit Plot</h1>
+    <div class="card p-4">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input class="btn btn-primary" type="submit" value="Update Plot Details">
+            <a class="btn btn-secondary" href="">Go Back</a>
+        </form>
+
+    </div>
+</div>
+{% endblock content %}

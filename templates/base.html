@@ -1,38 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Super Camper</title>
-    <!-- Boostrap5 -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css"
-    />
-  </head>
-  <body>
-    <!-- Navigation -->
-    {% include 'includes/nav.html' %}
 
-    <!-- Header Section -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Super Camper</title>
+  <!-- Boostrap5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
+</head>
 
-    {% if user.is_authenticated %}
-    <!-- Change this to an include file that says -->
-    <div class="container-fluid bg-primary-subtle p-3 text-center">
-      <h3>Welcome {{ user.username }} Super Campista!</h3>
-    </div>
-    {% else %} {% include 'includes/welcome.html' %} {% endif %}
-    
-    {% block content %} {% endblock content %}
+<body>
+  <!-- messages -->
+  {% include 'includes/messages.html' %}
 
-    <!-- Footer Section -->
-    {% include 'includes/footer.html' %}
+  <!-- Navigation -->
+  {% include 'includes/nav.html' %}
 
-    <!-- Bootstrap5 -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+  <!-- Header Section -->
+
+  {% if user.is_authenticated %}
+  <!-- Change this to an include file that says -->
+  <div class="container-fluid bg-primary-subtle p-3 text-center">
+    <h3>Welcome {{ user.username }} Super Campista!</h3>
+  </div>
+  {% else %} {% include 'includes/welcome.html' %} {% endif %}
+
+  {% block content %} {% endblock content %}
+
+  <!-- Footer Section -->
+  {% include 'includes/footer.html' %}
+
+  <!-- Bootstrap5 -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
 </html>

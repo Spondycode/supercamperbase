@@ -8,3 +8,10 @@ class PlotAddForm(ModelForm):
     class Meta:
         model = Plot
         fields = "__all__"
+
+
+class PlotEditForm(ModelForm):
+    class Meta:
+        model = Plot
+        fields = "__all__"
+        exclude = ["user"]
