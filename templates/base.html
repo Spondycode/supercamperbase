@@ -21,9 +21,9 @@
 
   {% if user.is_authenticated %}
   <!-- Change this to an include file that says -->
-  <div class="container-fluid bg-primary-subtle p-3 text-center">
+  <!-- <div class="container-fluid bg-primary-subtle p-3 text-center">
     <h3>Welcome {{ user.username }} Super Campista!</h3>
-  </div>
+  </div> -->
   {% else %} {% include 'includes/welcome.html' %} {% endif %}
 
   {% block content %} {% endblock content %}

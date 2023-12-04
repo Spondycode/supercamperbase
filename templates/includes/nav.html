@@ -20,6 +20,8 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'logout' %}">Logout</a>
         </li>
+        <li class="nav-link"> <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/person-male.png"
+            alt="person-male" /> User {{ user.username }}</li>
         {% else %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'login' %}">Login</a>
@@ -28,9 +30,7 @@
           <a class="nav-link" href="#">Register</a>
         </li>
         {% endif %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'about' %}">About</a>
-        </li>
+
       </ul>
     </div>
   </div>
