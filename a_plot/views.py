@@ -4,7 +4,8 @@ from .models import *
 from django.forms import ModelForm
 from django import forms # for add_plot_view
 from .forms import *
-from django.contrib import messages # for delete_plot_view
+from django.contrib import messages 
+from django.contrib.auth import login, logout, authenticate 
 
 def home_view(request):
     title = "Welcome to Super Camper App"
@@ -79,3 +80,17 @@ def edit_plot_view(request, pk):
             messages.success(request, "Plot updated successfully")
             return redirect("home")
     return render(request, "a_plots/edit_plot.html", context)
+
+
+def register_view(request):
+    if request.method == "POST":
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            messages.success(request, "Account created successfully")
+            return redirect("/home")
+    else:
+        form = RegisterForm()
+        
+    return render(request, "registration/register.html", {"form": form})
