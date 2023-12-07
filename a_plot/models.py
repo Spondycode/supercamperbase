@@ -18,6 +18,7 @@ class Plot(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     image = models.URLField(blank=True, null=True)
     plot = models.CharField(max_length=100)
+    tags = models.ManyToManyField("Tag", blank=True)
     what3words = models.URLField(blank=True, null=True)
     campsite = models.CharField(max_length=100)
     country = models.ForeignKey(Country, on_delete=models.CASCADE, related_name="plots", blank=True, null=True)
@@ -31,3 +32,13 @@ class Plot(models.Model):
     class Meta:
         ordering = ["-list_date"]
     
+
+class Tag(models.Model):
+    name = models.CharField(max_length=20)
+    slug = models.SlugField(max_length=20, unique=True)
+
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name_plural = "Tags"

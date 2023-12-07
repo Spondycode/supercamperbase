@@ -5,3 +5,5 @@ django-crispy-forms==2.1
 Pillow==10.1.0
 python-environ==0.4.54
 sqlparse==0.4.4
+fontawesomefree==6.5.1
+

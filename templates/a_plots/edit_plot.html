@@ -1,4 +1,5 @@
 {% extends 'base2.html' %}
+<!-- {% load static %} -->
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="container">
@@ -7,8 +8,8 @@
         <form method="POST">
             {% csrf_token %}
             {{ form|crispy }}
-            <input class="btn btn-primary" type="submit" value="Update Plot Details">
-            <a class="btn btn-secondary" href="">Go Back</a>
+            <input class="btn btn-primary btn-sm" type="submit" value="Update Plot Details">
+            <a class="btn btn-secondary btn-sm" href="{{ request.META.HTTP_REFERER }}">Cancel</a>
         </form>
 
     </div>

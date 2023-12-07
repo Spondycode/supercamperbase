@@ -31,8 +31,8 @@
                 <form method='POST'>
                     {% csrf_token %}
                     <div class="d-flex gap-2">
-                        <button class="btn btn-danger" type="submit">Confirm</button>
-                        <a class="btn btn-secondary" href="{{ request.META.HTTP_REFERER }}">Go Back</a>
+                        <button class="btn btn-danger btn-sm" type="submit">Confirm</button>
+                        <a class="btn btn-secondary btn-sm" href="{{ request.META.HTTP_REFERER }}">Cancel</a>
                     </div>
                 </form>
             </div>

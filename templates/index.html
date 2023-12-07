@@ -23,12 +23,22 @@
                                 <figure>
                                     <a href="#"><img class="w-100" src="{{ plot.image }}" alt=""></a>
                                 </figure>
-                                <a class="btn btn-outline-primary col" href="{% url 'show_plot' plot.id %}">View Plot
-                                    Page</a>
+                                <div class="d-flex gap-2">
+                                    <a class="btn btn-info btn-sm col" href="{% url 'show_plot' plot.id %}">View
+                                        Plot</a>
+                                    <a class="btn btn-primary btn-sm col" href="{% url 'edit_plot' plot.id %}">Edit
+                                        Plot</a>
+                                </div>
+                                <hr>
+                                <div class="d-flex gap-2">
+                                    {% for tag in plot.tags.all %}
+                                    <a class="btn btn-secondary btn-sm" href="">{{ tag }}</a>
+                                    {% endfor %}
+                                </div>
                             </div>
+
                         </div>
                         {% endfor %}
-                        <!-- Add logic so only the user who created the plot can edit it -->
                     </div>
                 </div>
             </div>

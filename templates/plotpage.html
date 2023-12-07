@@ -15,6 +15,7 @@
                     <p class="p-3">Here is a precise what3words address, made of 3 random words. Every 3 metre square in
                         the world has its own unique what3words address.</p>
                     <li><strong>What3Words:</strong> <a href="{{ plot.what3words }}"> Get Directions</a> </li>
+                    <li><strong>Plot Poster:</strong> {{ plot.owner }} </li>
                     {% endif %}
 
 
@@ -23,8 +24,12 @@
                     <a href="#"><img class="w-100" src="{{ plot.image }}" alt=""></a>
                 </figure>
                 <div class="d-flex gap-2">
+
+                    {% if user == plot.owner %}
+
                     <a class="btn btn-outline-warning col" href="{% url 'edit_plot' plot.id %}">Edit Plot</a>
                     <a class="btn btn-outline-danger col" href="{% url 'delete_plot' plot.id %}">Delete Plot</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -32,15 +37,7 @@
         <div class="col-md-4">
             <div class="row row-cols-md">
                 <div class=" m-2 p-2">
-                    <h3 class="text-center">SuperCamper Deals</h3>
-                    <li><strong>Stickers: </strong>First 200 sign ups who leave a review for a campsite plot can get a
-                        SuperCamper sticker</li>
-                    <li><strong>Two: </strong>Information about the site</li>
-                    <li><strong>Three: </strong>Links to Other features on the site</li>
-                    </ul>
-                    <figure>
-                        Advertisement for Mugs stickers whatever camping gear etc
-                    </figure>
+                    {% include 'includes/aside1.html' %}
                 </div>
             </div>
         </div>
@@ -50,3 +47,4 @@
 
 
 {% endblock content %}
+
