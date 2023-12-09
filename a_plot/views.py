@@ -7,14 +7,23 @@ from .forms import *
 from django.contrib import messages 
 from django.contrib.auth import login, logout, authenticate 
 
-def home_view(request):
-    title = "Welcome to Super Camper App"
-    plots = Plot.objects.all()
+def home_view(request, tag=None):
+    if tag:
+        plots = Plot.objects.filter(tags__slug=tag)
+    else:
+        plots = Plot.objects.all()
     context = {
-        "title": title,
         "plots": plots,
     }
     return render(request, "index.html", context)
+
+# def category_view(request, tag):
+#       # Corrected here
+#     context = {
+#         "plots": plots,
+#     }
+#     return render(request, "category.html", context)
+
 
 def about_view(request):
     title = "About Super Camper App"

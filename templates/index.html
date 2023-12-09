@@ -15,6 +15,7 @@
                             <div class=" card shadow m-2 p-2">
                                 <h3 class="text-center"><i class="bi bi-emoji-sunglasses text-primary"></i>
                                     {{ plot.title }}</h3>
+                                <p class="btn btn-block btn-outline-info btn-sm">Plot Poster: {{ plot.owner }}</p>
                                 <p class="text-truncate"><strong>Description:</strong> {{ plot.description }}</p>
                                 <ul>
                                     <li><strong>Campsite:</strong> {{ plot.campsite }}</li>
@@ -23,17 +24,17 @@
                                 <figure>
                                     <a href="#"><img class="w-100" src="{{ plot.image }}" alt=""></a>
                                 </figure>
-                                <div class="d-flex gap-2">
-                                    <a class="btn btn-info btn-sm col" href="{% url 'show_plot' plot.id %}">View
-                                        Plot</a>
-                                    <a class="btn btn-primary btn-sm col" href="{% url 'edit_plot' plot.id %}">Edit
-                                        Plot</a>
-                                </div>
+                                <a class="btn btn-info btn-sm col" href="{% url 'show_plot' plot.id %}">
+                                    View Plot</a>
+
                                 <hr>
-                                <div class="d-flex gap-2">
-                                    {% for tag in plot.tags.all %}
-                                    <a class="btn btn-secondary btn-sm" href="">{{ tag }}</a>
-                                    {% endfor %}
+                                <div>
+                                    <a class="btn btn-secondary btn-sm" href="">
+                                        {{ plot.tags }}</a>
+                                    <!-- add a link to the category_view -->
+
+
+
                                 </div>
                             </div>
 
@@ -42,11 +43,14 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 ">
-                <div class="row row-cols-md">
+            <div class=" col-lg-3 ">
+                <div class=" row row-cols-md">
                     <h3 class="text-center">Super Duper !</h3>
                     <div class=" m-4">
                         <div class="col ">
+
+                            {% include 'includes/categories.html' %}
+
                             {% include 'includes/aside1.html' %}
 
                             {% include 'includes/aside2.html' %}
@@ -61,6 +65,8 @@
 
     <br>
     <br>
+
+
     {% include 'includes/showcase.html' %}
 
     {% include 'includes/questions.html' %}

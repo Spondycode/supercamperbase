@@ -29,6 +29,9 @@
 
                     <a class="btn btn-outline-warning col" href="{% url 'edit_plot' plot.id %}">Edit Plot</a>
                     <a class="btn btn-outline-danger col" href="{% url 'delete_plot' plot.id %}">Delete Plot</a>
+                    {% else %}
+                    <a class="btn btn-outline-info col" href="{% url 'home' %}">Home</a>
+
                     {% endif %}
                 </div>
             </div>
@@ -47,4 +50,3 @@
 
 
 {% endblock content %}
-

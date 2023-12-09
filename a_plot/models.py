@@ -10,7 +10,18 @@ class Country(models.Model):
     # take care od the plural form of the model name
     class Meta:
         verbose_name_plural = "Countries"
+        
 
+class Tag(models.Model):
+    name = models.CharField(max_length=20)
+    slug = models.SlugField(max_length=20, unique=True)
+
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name_plural = "Tags"        
+           
 
 class Plot(models.Model):
     title = models.CharField(max_length=100)
@@ -18,7 +29,7 @@ class Plot(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     image = models.URLField(blank=True, null=True)
     plot = models.CharField(max_length=100)
-    tags = models.ManyToManyField("Tag", blank=True)
+    tags = models.ForeignKey(Tag, on_delete=models.CASCADE, related_name="plots", blank=True, null=True)
     what3words = models.URLField(blank=True, null=True)
     campsite = models.CharField(max_length=100)
     country = models.ForeignKey(Country, on_delete=models.CASCADE, related_name="plots", blank=True, null=True)
@@ -33,12 +44,3 @@ class Plot(models.Model):
         ordering = ["-list_date"]
     
 
-class Tag(models.Model):
-    name = models.CharField(max_length=20)
-    slug = models.SlugField(max_length=20, unique=True)
-
-    def __str__(self):
-        return self.name
-    
-    class Meta:
-        verbose_name_plural = "Tags"

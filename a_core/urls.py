@@ -5,12 +5,13 @@ from django.contrib import admin
 from django.urls import path, include
 from a_plot.views import *
 from a_user.views import *
-from a_plot import views
+# from a_plot import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("user/", include("a_user.urls")),
     path("", home_view, name="home"),
+    path("category/<tag>", home_view, name="category"),
     path("home/", home_view, name="home"),
     path("about/", about_view, name="about"),
     path("show_plot/<plot_id>/", plot_view, name="show_plot"),

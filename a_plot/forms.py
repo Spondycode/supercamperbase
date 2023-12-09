@@ -13,11 +13,14 @@ class PlotAddForm(ModelForm):
         labels = {
             "tags": 'Category'
         }
+        # widgets = {
+        #     'tags': forms.RadioSelect(),
+        # }
 
 class PlotEditForm(ModelForm):
     class Meta:
         model = Plot
-        fields = ["title", "description", "price", "image", "plot", "what3words", "campsite", "country"]
+        fields = ["title", "description", "price", "image", "plot", "what3words", "campsite", "country", "tags"]
         
         
         
