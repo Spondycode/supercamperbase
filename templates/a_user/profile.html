@@ -1,0 +1,71 @@
+{% extends 'base2.html' %} {% load static %}
+{% block content %}
+
+
+
+<body>
+  <div class="container-fluid ">
+
+    <div class="row">
+      <div class="col-lg-8 ">
+        <div class="container col-md-10">
+          <div class="row row-cols-md">
+            {% for plot in plots %}
+            <div class="col-md-6">
+              <div class=" card shadow m-2 p-2">
+                <h3 class="text-center"><i class="bi bi-emoji-sunglasses text-primary"></i>
+                  {{ plot.title }}</h3>
+                <p class="btn btn-block btn-outline-info btn-sm">Super Camper: {{ plot.owner }}</p>
+                <p class="text-truncate"><strong>Description:</strong> {{ plot.description }}</p>
+                <ul>
+                  <li><strong>Campsite:</strong> {{ plot.campsite }}</li>
+                  <li><strong>Country:</strong> {{ plot.country }}</li>
+                </ul>
+                <figure>
+                  <a href="#"><img class="w-100" src="{{ plot.image }}" alt=""></a>
+                </figure>
+                <a class="btn btn-info btn-sm col" href="{% url 'show_plot' plot.id %}">
+                  View Plot</a>
+
+                <hr>
+                <div>
+                  <a class="btn btn-secondary btn-sm" href="">
+                    {{ plot.tags }}</a>
+
+                </div>
+              </div>
+
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <div class=" col-lg-3 ">
+        <div class=" row row-cols-md">
+          <h3 class="text-center">Super Duper !</h3>
+          <div class=" m-4">
+            <div class="col ">
+
+              {% include 'includes/categories.html' %}
+
+              {% include 'includes/aside1.html' %}
+
+              {% include 'includes/aside2.html' %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+  {% include 'includes/questions.html' %}
+
+
+</body>
+
+
+<div>{% include 'includes/showcase.html' %}</div>
+{% endblock %}

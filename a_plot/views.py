@@ -37,7 +37,7 @@ def plot_view(request, plot_id):
     context = {
         "plot": plot,
     }
-    return render(request, "plotpage.html", context)
+    return render(request, "a_plots/plotpage.html", context)
 
 
 def add_plot_view(request):
@@ -58,7 +58,7 @@ def add_plot_view(request):
         "submitted": submitted,
     }
     print(form.errors)
-    return render(request, "add_plot.html", context)
+    return render(request, "a_plots/add_plot.html", context)
 
 # To delete the post, we need to get the post id from the URL, then get the post from the database, and then delete it.
 def delete_plot_view(request, pk):
@@ -71,7 +71,7 @@ def delete_plot_view(request, pk):
         plot.delete()
         messages.success(request, "Plot deleted successfully")
         return redirect("home")
-    return render(request, "delete_plot.html", context)
+    return render(request, "a_plots/delete_plot.html", context)
 
 
 # To edit a plot, we need to get the plot id from the URL, then get the plot from the database, and then edit it.
@@ -105,3 +105,29 @@ def register_view(request):
     return render(request, "registration/register.html", {"form": form})
 
 
+    
+    
+def my_plots_view(request):
+    if request.user.is_authenticated:
+        plots = Plot.objects.filter(user=request.owner)  # Fetch plots created by the logged in user
+        context = {
+            "plots": plots,
+        }
+        return render(request, "a_plots/myplots.html", context)
+        
+    else:
+        messages.success(request, "You need to login first")
+        return redirect("/login")
+
+
+def profile_view(request):
+    if request.user.is_authenticated:
+        plots = Plot.objects.filter(owner=request.user)  # Fetch plots created by the logged in user
+        context = {
+            "plots": plots,
+        }
+        return render(request, "a_user/profile.html", context)
+        
+    else:
+        messages.success(request, "You need to login first")
+        return redirect("/login")

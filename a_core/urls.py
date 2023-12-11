@@ -5,7 +5,7 @@ from django.contrib import admin
 from django.urls import path, include
 from a_plot.views import *
 from a_user.views import *
-# from a_plot import views
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -14,10 +14,7 @@ urlpatterns = [
     path("category/<tag>", home_view, name="category"),
     path("home/", home_view, name="home"),
     path("about/", about_view, name="about"),
-    path("show_plot/<plot_id>/", plot_view, name="show_plot"),
-    path("add_plot/", add_plot_view, name="add_plot"),
-    path("delete_plot/<pk>/", delete_plot_view, name="delete_plot"),
-    path("edit_plot/<pk>/", edit_plot_view, name="edit_plot"),
+    path("", include("a_plot.urls")),
     path("", include('django.contrib.auth.urls')),
     path("register/", register_view, name="register"),
 ]

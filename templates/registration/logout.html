@@ -1,0 +1,10 @@
+{% extends 'base2.html' %}
+
+{% block content %}
+
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+</form>
+
+{% endblock content %}
