@@ -1,9 +1,9 @@
+{% load static %}
 <footer class="row p-1 bg-info text-white text-center mt-5 sticky-bottom">
   <span class="col mt-2 ">Copyright &copy; 2024 SuperCamper</span>
   <div class="col">
     <a href="{% url 'home' %}">
-      <img class=" p-1 btn" width="48" height="48"
-        src="https://img.icons8.com/external-xnimrodx-blue-xnimrodx/64/external-tent-camping-and-outdoor-xnimrodx-blue-xnimrodx.png"
+      <img class=" p-1 btn" width="48" height="48" src="{% static 'images/tent-logo.png' %}"
         alt="external-tent-camping" />
     </a>
   </div>
