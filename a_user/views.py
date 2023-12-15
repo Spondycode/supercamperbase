@@ -1,8 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 from a_plot.views import *
-from a_user.views import *
-from a_user.forms import *
+from .forms import *
 
 def logout_view(request):
     logout(request)
@@ -34,7 +33,7 @@ def profile_edit_view(request):
             "profile": profile,
         }
         if request.method == "POST":
-            form = ProfileAddForm(request.POST, instance=profile)
+            form = ProfileAddForm(request.POST, request.FILES, instance=profile)
             if form.is_valid():
                 form.save()
                 messages.success(request, "Profile updated successfully")

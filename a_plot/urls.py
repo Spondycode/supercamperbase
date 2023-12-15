@@ -7,6 +7,5 @@ urlpatterns = [
     path("delete_plot/<pk>/", delete_plot_view, name="delete_plot"),
     path("edit_plot/<pk>/", edit_plot_view, name="edit_plot"),
     path("my_plots/", my_plots_view, name="my_plots"),
-    
     path("myplots/", my_plots_view, name="my_plots"),
 ]

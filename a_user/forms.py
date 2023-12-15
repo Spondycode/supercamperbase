@@ -1,13 +1,19 @@
 from django import forms    
 from .models import * 
 from django.forms import ModelForm
-from .models import Profile
+from .models import *
 
 class ProfileAddForm(ModelForm):
     class Meta:
         model = Profile
         # use the fields from the Profile model
-        fields = ['user', 'image', 'realname', 'email', 'nationality', 'campermode', 'camperstory']
+        exclude = ['user']
+        
         labels = {
+            "realname": "Name",
             "campermode": 'Tent or Camper?',
+            "camperstory": "Your Camper Experience",
+        }
+        widgets = {
+            'image': forms.FileInput(),
         }
