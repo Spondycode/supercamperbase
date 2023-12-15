@@ -7,6 +7,31 @@
   <div class="container-fluid ">
 
     <div class="row">
+      <div class="container my-4 col-lg-8">
+        <div class="card">
+          <div class="card-body text-center">
+            <h3 class="text-center"> <i class="bi bi-emoji-sunglasses text-primary"></i> -
+              {{ profile.realname }}'s Profile</h3>
+            <div>{{ profile.user.username }} - {{ profile.nationality }}</div>
+            <img class="w-100" src="{{ profile.image.url }}" alt="avatar">
+          </div>
+          <div class="card-body text-center">
+            <h4 class="text-primary">My Camper Story</h4>
+            <p>Often I camp in a {{ profile.campermode }}</p>
+            <p class="text-center">{{ profile.camperstory }}</p>
+            <p class="text-center py-3">Super Camper member since - {{ profile.created }}</p>
+
+            <div class="container text-center">
+              <a class="btn btn-outline-warning" href="{% url 'profile-edit' %}">Edit Profile</a>
+              <a class="btn btn-outline-info" href="/password_change">Password Change</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
       <div class="col-lg-8 ">
         <div class="container col-md-10">
           <div class="row row-cols-md">

@@ -120,14 +120,3 @@ def my_plots_view(request):
         return redirect("/login")
 
 
-def profile_view(request):
-    if request.user.is_authenticated:
-        plots = Plot.objects.filter(owner=request.user)  # Fetch plots created by the logged in user
-        context = {
-            "plots": plots,
-        }
-        return render(request, "a_user/profile.html", context)
-        
-    else:
-        messages.success(request, "You need to login first")
-        return redirect("/login")
