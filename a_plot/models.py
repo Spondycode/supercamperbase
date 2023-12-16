@@ -35,7 +35,7 @@ class Plot(models.Model):
     campsite = models.CharField(max_length=100)
     country = models.ForeignKey(Country, on_delete=models.CASCADE, related_name="plots", blank=True, null=True)
     list_date = models.DateTimeField(auto_now_add=True)
-    owner = models.ForeignKey("auth.User", on_delete=models.CASCADE, related_name="plots")
+    owner = models.ForeignKey("auth.User", on_delete=models.SET_NULL, null=True, related_name="plots")
     id = models.CharField(max_length=100, default=uuid.uuid4, unique=True, primary_key=True, editable=False)
 
     def __str__(self):

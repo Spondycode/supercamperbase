@@ -7,22 +7,30 @@ from .forms import *
 from django.contrib import messages 
 from django.contrib.auth import login, logout, authenticate 
 
-def home_view(request, tag=None):
-    if tag:
-        plots = Plot.objects.filter(tags__slug=tag)
-    else:
-        plots = Plot.objects.all()
+# def home_view(request, tag=None):
+#     if tag:
+#         plots = Plot.objects.filter(tags__slug=tag)
+#     else:
+#         plots = Plot.objects.all()
+#     context = {
+#         "plots": plots,
+#     }
+#     return render(request, "index.html", context)
+
+def home_view(request):
+    plots = Plot.objects.all()
     context = {
         "plots": plots,
     }
     return render(request, "index.html", context)
 
-# def category_view(request, tag):
-#       # Corrected here
-#     context = {
-#         "plots": plots,
-#     }
-#     return render(request, "category.html", context)
+
+def category_view(request, tag):
+      # Corrected here
+    context = {
+        "plots": plots,
+    }
+    return render(request, "category.html", context)
 
 
 def about_view(request):

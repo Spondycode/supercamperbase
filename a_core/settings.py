@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     "a_user.apps.AUserConfig",
     "a_plot.apps.APlotConfig",
     
+    "django_cleanup.apps.CleanupConfig",
     "crispy_forms",
     "crispy_bootstrap5",
     "fontawesomefree"
@@ -125,7 +126,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/home'
 LOGOUT_REDIRECT_URL = '/login'
 # PASSWORD_CHANGE_RED
 
