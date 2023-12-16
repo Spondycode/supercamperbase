@@ -1,5 +1,6 @@
 from django.db import models
 import uuid
+from django.templatetags.static import static
 
 class Country(models.Model):
     name = models.CharField(max_length=100)
@@ -44,4 +45,10 @@ class Plot(models.Model):
     class Meta:
         ordering = ["-list_date"]
     
-
+    @property
+    def plotty(self):
+        try:
+            plotty = self.image.url
+        except:
+            plotty = static('images/default.jpg')
+        return plotty

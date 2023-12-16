@@ -17,8 +17,20 @@
           </div>
           <div class="card-body text-center">
             <h4 class="text-primary">My Camper Story</h4>
+            {% if profile.campermode %}
             <p>Often I camp in a {{ profile.campermode }}</p>
+            {% else %}
+            <p>Lying on a blow up mattress looking at the stars is the best form of camping</p>
+            {% endif %}
+
+            {% if profile.camperstory %}
             <p class="text-center">{{ profile.camperstory }}</p>
+            {% else %}
+            <p>Don't forget to tell us about your experiences of camping over the years. Or is this the first time out
+              and you forgot to bring the sleeping bag?</p>
+            {% endif %}
+
+
             <p class="text-center py-3">Super Camper member since - {{ profile.created }}</p>
 
             <div class="container text-center">

@@ -10,14 +10,14 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("", home_view, name="home"),
     # path("home/", home_view, name="home"),
     path("", include("a_user.urls")),
-    path("", home_view, name="home"),
-    # path("category/<tag>", home_view, name="category"),
     path("about/", about_view, name="about"),
     path("", include("a_plot.urls")),
     path("", include('django.contrib.auth.urls')),
     path("register/", register_view, name="register"),
+    # path("category/<tag>", home_view, name="category"),
 ]
 
 
