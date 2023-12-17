@@ -7,6 +7,7 @@ urlpatterns = [
     path("logout/", logout_view, name="logout"),
     path("profile/", profile_view, name="profile"),
     path("profile/edit/", profile_edit_view, name="profile-edit"),
+    path("profile/create/", profile_create_view, name="profile-create"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

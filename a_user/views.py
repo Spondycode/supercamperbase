@@ -43,3 +43,25 @@ def profile_edit_view(request):
     else:
         messages.success(request, "You need to login first")
         return redirect("/login")
+    
+    
+    #create a view to create a profile
+def profile_create_view(request):  # Create a new profile
+    if request.user.is_authenticated:
+        form = ProfileAddForm()
+        context = {
+            "form": form,
+        }
+        if request.method == "POST":
+            form = ProfileAddForm(request.POST, request.FILES)
+            if form.is_valid():
+                profile = form.save(commit=False)
+                profile.user = request.user
+                profile.save()
+                messages.success(request, "Profile created successfully")
+                return redirect("profile")
+        return render(request, "a_user/profile_create.html", context)
+        
+    else:
+        messages.success(request, "You need to login first")
+        return redirect("/login")
