@@ -6,6 +6,8 @@
     <div class="card">
         <div class="card-header">
             <h1>Edit Your Profile</h1>
+            <p>Put in the basics of who you are. Nothing personal, just the basics about you and your camping
+                experiences</p>
         </div>
         <div class="card-body">
             <form method="POST" enctype="multipart/form-data">
@@ -14,6 +16,7 @@
 
                 <button type="submit" class="btn btn-primary">Submit</button>
                 <a class="btn btn-secondary" href="{{ request.META.HTTP_REFERER }}">Cancel</a>
+                <a class="btn btn-danger" href="{% url 'profile-delete-confirm' %}">Delete Profile</a>
             </form>
         </div>
     </div>

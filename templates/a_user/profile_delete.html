@@ -1,0 +1,17 @@
+{% extends "base2.html" %}
+
+{% block content %}
+    <h1>Delete Profiile</h1>
+    <p>This will delete the account too</p>
+    <p>maybe...</p>
+    <div class="card-body">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form|crispy }}
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a class="btn btn-secondary" href="{{ request.META.HTTP_REFERER }}">Cancel</a>
+            <a class="btn btn-danger" href="{% url 'profile-delete' %}">Delete Profile</a>
+        </form>
+    </div>
+{% endblock %}

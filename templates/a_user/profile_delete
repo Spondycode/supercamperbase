@@ -1,6 +1,0 @@
-{% extends "base2.html" %}
-
-{% block content %}
-    <h1>Delete Profiile</h1>
-    <p>This will delete the account too</p>
-{% endblock %}
