@@ -128,3 +128,22 @@ def my_plots_view(request):
         return redirect("/login")
 
 
+# SEarch plots
+def search_plots_view(request):
+    
+    if request.method == "POST":
+        search = request.POST["search"]
+        plots = Plot.objects.filter(title__contains=search)
+        context = {
+            "plots": plots,
+            "search": search
+        }
+        return render(request, "a_plots/plot_search.html", context)
+        plots = Plot.objects.filter(title__icontains=query)
+        
+    else:
+        plots = Plot.objects.all()
+    context = {
+        "plots": plots,
+    }
+    return render(request, "a_plots/plot_search.html", context)

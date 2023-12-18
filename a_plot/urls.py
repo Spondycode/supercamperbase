@@ -8,4 +8,5 @@ urlpatterns = [
     path("edit_plot/<pk>/", edit_plot_view, name="edit_plot"),
     path("my_plots/", my_plots_view, name="my_plots"),
     path("myplots/", my_plots_view, name="my_plots"),
+    path("search_plots/", search_plots_view, name="search_plots"),
 ]
