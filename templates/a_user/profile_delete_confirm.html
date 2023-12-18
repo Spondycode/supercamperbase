@@ -2,16 +2,20 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<h1>Delete Profiile</h1>
-<p>This will delete the account too</p>
-<p>maybe...</p>
-<div class="card-body">
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form|crispy }}
+<div class="container col">
+    <div class="card m-3 text-center">
+        <h1 class="card-header">Delete Profiile</h1>
+        <p>This will delete the account too</p>
+        <p>For Sure...</p>
+        <div class="card-body">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form|crispy }}
 
-        <a class="btn btn-secondary" href="{{ request.META.HTTP_REFERER }}">Cancel</a>
-        <a class="btn btn-danger" href="{% url 'profile-delete' %}">Delete Profile</a>
-    </form>
+                <a class="btn btn-secondary" href="{{ request.META.HTTP_REFERER }}">Cancel</a>
+                <a class="btn btn-danger" href="{% url 'profile-delete' %}">Delete Profile</a>
+            </form>
+        </div>
+    </div>
 </div>
 {% endblock %}
