@@ -2,11 +2,11 @@
     <h3 class="text-center mt-2">Categories</h3>
     <p>Is the plot in a campsite or one of those official camping spots you find in or near a town. Or is it totally
         wild and you found it and loved it because it was a special place?</p>
-    Connect up the links to show plots based on situation
+   
     <h5 class="mt-2">Search based on Category</h5>
-    <p>COMMENT - Still have to work out how to do this</p>
+
     <div class="container m-1">
-        <form class="d-flex" method="POST" action="" type="search" placeholder="Search">
+        <form class="d-flex" method="POST" action="{% url 'search_categories' %}" type="search" placeholder="Search">
             {% csrf_token %}
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
             <button class="btn btn-outline-success" type="submit">Search</button>
@@ -14,13 +14,15 @@
     </div>
 
 
+
+
     <div class="text-center">
-        <a class="btn btn-secondary btn-sm" href="#">
-            Campsite </a>
-        <a class="btn btn-secondary btn-sm" href="">
-            Official Plot</a>
-        <a class="btn btn-secondary btn-sm" href="">
-            Wild</a>
+        <span class="badge rounded-pill bg-secondary m-1">
+            Campsite </span>
+        <span class="badge rounded-pill bg-dark m-1">
+            Official Plot</span>
+        <span class="badge rounded-pill bg-secondary m-1">
+            Wild</span>
     </div>
 
 

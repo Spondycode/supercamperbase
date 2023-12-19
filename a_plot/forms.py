@@ -11,9 +11,7 @@ class PlotAddForm(ModelForm):
         model = Plot
         fields = ['title', 'description', 'price', 'image', 'plot', 'what3words', 'campsite', 'country', 'categories', 'owner']
         
-        # widgets = {
-        #     'categories': forms.RadioSelect(),
-        # }
+
 
 class PlotEditForm(ModelForm):
     class Meta:

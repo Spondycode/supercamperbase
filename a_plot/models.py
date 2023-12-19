@@ -26,9 +26,9 @@ class Tag(models.Model):
            
            
 CATEGORIES = (
-    (1, "Campsite"),
-    (2, "Official"),
-    (3, "Wild"),
+    ("Campsite", "Campsite"),
+    ("Official", "Official"),
+    ("Wild", "Wild"),
 )
 
 CATEGORIES_PARAMS = {
@@ -45,7 +45,7 @@ class Plot(models.Model):
     image = models.URLField(blank=True, null=True)
     plot = models.CharField(max_length=100)
     tags = models.ForeignKey(Tag, on_delete=models.CASCADE, related_name="plots", blank=True, null=True)
-    categories = models.IntegerField(choices=CATEGORIES, default=1)
+    categories = models.CharField(max_length=25, choices=CATEGORIES, default=1)
     what3words = models.URLField(blank=True, null=True)
     campsite = models.CharField(max_length=100)
     country = models.ForeignKey(Country, on_delete=models.CASCADE, related_name="plots", blank=True, null=True)

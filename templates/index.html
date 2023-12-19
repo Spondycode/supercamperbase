@@ -36,15 +36,8 @@
                                 <hr>
                                 <div>
                                     <a class="btn btn-secondary btn-sm" href="">
-                                        {% if plot.categories == 1 %}
-                                          Campsite
-                                        {% endif %}
-                                        {% if plot.categories == 2 %}
-                                          Official Plot
-                                        {% endif %}
-                                        {% if plot.categories == 3 %}
-                                          Wild Plot
-                                        {% endif %}
+                                        {{ plot.categories }}
+                                        
 
                                     </a>
                                     <!-- add a link to the category_view -->

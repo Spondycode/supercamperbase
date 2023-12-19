@@ -17,19 +17,11 @@
                     <li><strong>What3Words:</strong> <a href="{{ plot.what3words }}"> Get Directions</a> </li>
                     {% endif %}
                     <li><strong>Plot Poster:</strong> {{ plot.owner }} </li>
-                    <li><strong>Plot Poster:</strong> {{ plot.owner.profile.realname }} </li>
+                    <li><strong>Real Name:</strong> {{ plot.owner.profile.realname }} </li>
 
                     <div>
                         <a class="btn btn-secondary btn-sm" href="">
-                            {% if plot.categories == 1 %}
-                              Campsite
-                            {% endif %}
-                            {% if plot.categories == 2 %}
-                              Official Plot
-                            {% endif %}
-                            {% if plot.categories == 3 %}
-                              Wild Plot
-                            {% endif %}
+                            {{ plot.categories }}
 
                         </a>
                         <!-- add a link to the category_view -->
@@ -42,7 +34,7 @@
                 </figure>
                 <div class="d-flex gap-2">
 
-                    {% if user == plot.owner %}
+                    {% if user.is_authenticated and user == plot.owner %}
 
                     <a class="btn btn-outline-warning col" href="{% url 'edit_plot' plot.id %}">Edit Plot</a>
                     <a class="btn btn-outline-danger col" href="{% url 'delete_plot' plot.id %}">Delete Plot</a>

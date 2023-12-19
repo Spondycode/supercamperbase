@@ -149,8 +149,21 @@ def search_plots_view(request):
     return render(request, "a_plots/plot_search.html", context)
 
 
-CATEGORIES = (
-    (1, "Campsite"),
-    (2, "Official"),
-    (3, "Wild"),
-)
+# search plots by category
+def search_categories_view(request):
+    if request.method == "POST":
+        search = request.POST["search"]
+        plots = Plot.objects.filter(categories__contains=search)
+        context = {
+            "plots": plots,
+            "search": search
+        }
+        return render(request, "a_plots/category_search.html", context)
+        plots = Plot.objects.filter(categories__icontains=query)
+    else:
+        plots = Plot.objects.all()
+    context = {
+        "plots": plots,
+    }
+    
+    return render(request, "a_plots/category_search.html", context)
