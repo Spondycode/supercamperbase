@@ -9,18 +9,16 @@ from django.contrib.auth.models import User
 class PlotAddForm(ModelForm):
     class Meta:
         model = Plot
-        fields = ['title', 'description', 'price', 'image', 'plot', 'what3words', 'campsite', 'country', 'tags', 'owner']
-        labels = {
-            "tags": 'Category'
-        }
+        fields = ['title', 'description', 'price', 'image', 'plot', 'what3words', 'campsite', 'country', 'categories', 'owner']
+        
         # widgets = {
-        #     'tags': forms.RadioSelect(),
+        #     'categories': forms.RadioSelect(),
         # }
 
 class PlotEditForm(ModelForm):
     class Meta:
         model = Plot
-        fields = ["title", "description", "price", "image", "plot", "what3words", "campsite", "country", "tags"]
+        fields = ["title", "description", "price", "image", "plot", "what3words", "campsite", "country", "categories"]
         
         
         

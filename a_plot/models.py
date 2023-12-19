@@ -24,6 +24,19 @@ class Tag(models.Model):
     class Meta:
         verbose_name_plural = "Tags"        
            
+           
+CATEGORIES = (
+    (1, "Campsite"),
+    (2, "Official"),
+    (3, "Wild"),
+)
+
+CATEGORIES_PARAMS = {
+    1: {"slug": "campsite", "name": "Campsite"},
+    2: {"slug": "official", "name": "Official"},
+    3: {"slug": "wild", "name": "Wild"},
+}
+
 
 class Plot(models.Model):
     title = models.CharField(max_length=100)
@@ -32,6 +45,7 @@ class Plot(models.Model):
     image = models.URLField(blank=True, null=True)
     plot = models.CharField(max_length=100)
     tags = models.ForeignKey(Tag, on_delete=models.CASCADE, related_name="plots", blank=True, null=True)
+    categories = models.IntegerField(choices=CATEGORIES, default=1)
     what3words = models.URLField(blank=True, null=True)
     campsite = models.CharField(max_length=100)
     country = models.ForeignKey(Country, on_delete=models.CASCADE, related_name="plots", blank=True, null=True)

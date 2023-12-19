@@ -36,7 +36,17 @@
                                 <hr>
                                 <div>
                                     <a class="btn btn-secondary btn-sm" href="">
-                                        {{ plot.tags }}</a>
+                                        {% if plot.categories == 1 %}
+                                          Campsite
+                                        {% endif %}
+                                        {% if plot.categories == 2 %}
+                                          Official Plot
+                                        {% endif %}
+                                        {% if plot.categories == 3 %}
+                                          Wild Plot
+                                        {% endif %}
+
+                                    </a>
                                     <!-- add a link to the category_view -->
                                 </div>
                             </div>
@@ -46,7 +56,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class=" col-lg-3 ">
                 <div class=" row row-cols-md">
                     <h3 class="text-center">Super Campista !</h3>

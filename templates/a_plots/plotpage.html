@@ -15,8 +15,25 @@
                     <p class="p-3">Here is a precise what3words address, made of 3 random words. Every 3 metre square in
                         the world has its own unique what3words address.</p>
                     <li><strong>What3Words:</strong> <a href="{{ plot.what3words }}"> Get Directions</a> </li>
-                    <li><strong>Plot Poster:</strong> {{ plot.owner }} </li>
                     {% endif %}
+                    <li><strong>Plot Poster:</strong> {{ plot.owner }} </li>
+                    <li><strong>Plot Poster:</strong> {{ plot.owner.profile.realname }} </li>
+
+                    <div>
+                        <a class="btn btn-secondary btn-sm" href="">
+                            {% if plot.categories == 1 %}
+                              Campsite
+                            {% endif %}
+                            {% if plot.categories == 2 %}
+                              Official Plot
+                            {% endif %}
+                            {% if plot.categories == 3 %}
+                              Wild Plot
+                            {% endif %}
+
+                        </a>
+                        <!-- add a link to the category_view -->
+                    </div>
 
 
                 </ul>

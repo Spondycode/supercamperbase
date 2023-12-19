@@ -147,3 +147,10 @@ def search_plots_view(request):
         "plots": plots,
     }
     return render(request, "a_plots/plot_search.html", context)
+
+
+CATEGORIES = (
+    (1, "Campsite"),
+    (2, "Official"),
+    (3, "Wild"),
+)

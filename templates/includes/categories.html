@@ -6,7 +6,7 @@
     <h5 class="mt-2">Search based on Category</h5>
     <p>COMMENT - Still have to work out how to do this</p>
     <div class="container m-1">
-        <form class="d-flex" method="POST" action="{% url 'search_plots' %}" type="search" placeholder="Search">
+        <form class="d-flex" method="POST" action="" type="search" placeholder="Search">
             {% csrf_token %}
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
             <button class="btn btn-outline-success" type="submit">Search</button>
@@ -20,7 +20,7 @@
         <a class="btn btn-secondary btn-sm" href="">
             Official Plot</a>
         <a class="btn btn-secondary btn-sm" href="">
-            Wild Plot</a>
+            Wild</a>
     </div>
 
 

@@ -9,4 +9,5 @@ urlpatterns = [
     path("my_plots/", my_plots_view, name="my_plots"),
     path("myplots/", my_plots_view, name="my_plots"),
     path("search_plots/", search_plots_view, name="search_plots"),
+    # path("search_categories/", search_categories_view, name="search_categories"),
 ]
