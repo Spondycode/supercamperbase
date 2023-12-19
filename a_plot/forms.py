@@ -9,14 +9,14 @@ from django.contrib.auth.models import User
 class PlotAddForm(ModelForm):
     class Meta:
         model = Plot
-        fields = ['title', 'description', 'price', 'image', 'plot', 'what3words', 'campsite', 'country', 'categories', 'owner']
+        fields = ['title', 'description', 'price', 'season', 'image', 'plot', 'what3words', 'campsite', 'countries', 'categories', 'owner']
         
 
 
 class PlotEditForm(ModelForm):
     class Meta:
         model = Plot
-        fields = ["title", "description", "price", "image", "plot", "what3words", "campsite", "country", "categories"]
+        fields = ["title", "description", "price", 'season', "image", "plot", "what3words", "campsite", "countries", "categories"]
         
         
         

@@ -17,6 +17,7 @@ from django.contrib.auth import login, logout, authenticate
 #     }
 #     return render(request, "index.html", context)
 
+# HOME PAGE
 def home_view(request):
     plots = Plot.objects.all()
     context = {
@@ -25,12 +26,16 @@ def home_view(request):
     return render(request, "index.html", context)
 
 
-def category_view(request, tag):
-      # Corrected here
+# Filter by country
+def country_view(request):
+    plots = Plot.objects.filter(country=request.country.name)
     context = {
         "plots": plots,
     }
-    return render(request, "category.html", context)
+    return render(request, "a_plots/country_view.html", context)
+
+
+
 
 
 def about_view(request):
@@ -47,7 +52,7 @@ def plot_view(request, plot_id):
     }
     return render(request, "a_plots/plotpage.html", context)
 
-
+# Add a plot
 def add_plot_view(request):
     submitted = False
     if request.method == "POST":
@@ -68,7 +73,7 @@ def add_plot_view(request):
     print(form.errors)
     return render(request, "a_plots/add_plot.html", context)
 
-# To delete the post, we need to get the post id from the URL, then get the post from the database, and then delete it.
+# To delete the plot, we need to get the plot id from the URL, then get the plot from the database, and then delete it.
 def delete_plot_view(request, pk):
     plot = Plot.objects.get(id=pk)
     context = {
@@ -95,7 +100,7 @@ def edit_plot_view(request, pk):
         if form.is_valid():
             form.save()
             messages.success(request, "Plot updated successfully")
-            return redirect("home")
+            return redirect("profile")
     return render(request, "a_plots/edit_plot.html", context)
 
 
@@ -167,3 +172,25 @@ def search_categories_view(request):
     }
     
     return render(request, "a_plots/category_search.html", context)
+
+
+
+
+# search plots by country
+def search_countries_view(request):
+    if request.method == "POST":
+        search = request.POST["search"]
+        plots = Plot.objects.filter(countries__contains=search)
+        context = {
+            "plots": plots,
+            "search": search
+        }
+        return render(request, "a_plots/country_search.html", context)
+        plots = Plot.objects.filter(countries__icontains=query)
+    else:
+        plots = Plot.objects.all()
+    context = {
+        "plots": plots,
+    }
+    
+    return render(request, "a_plots/country_search.html", context)

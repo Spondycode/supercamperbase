@@ -37,18 +37,77 @@ CATEGORIES_PARAMS = {
     3: {"slug": "wild", "name": "Wild"},
 }
 
+COUNTRIES = (
+    ("United Kingdom", "United Kingdom"),
+    ("France", "France"),
+    ("Spain", "Spain"),
+    ("Portugal", "Portugal"),
+    ("Italy", "Italy"),
+    ("Germany", "Germany"),
+    ("Netherlands", "Netherlands"),
+    ("Ireland", "Ireland"),
+    ("Belgium", "Belgium"),
+    ("Greece", "Greece"),
+    ("Switzerland", "Switzerland"),
+    ("Austria", "Austria"),
+    ("Sweden", "Sweden"),
+    ("Norway", "Norway"),
+    ("Finland", "Finland"),
+    ("Denmark", "Denmark"),
+    ("Croatia", "Croatia"),
+    ("Poland", "Poland"),
+    ("Romania", "Romania"),
+    ("Bulgaria", "Bulgaria"),
+    ("Czech Republic", "Czech Republic"),
+    ("Hungary", "Hungary"),
+    ("Slovakia", "Slovakia"),
+    ("Slovenia", "Slovenia"),
+    ("Luxembourg", "Luxembourg"),
+    ("Latvia", "Latvia"),
+    ("Estonia", "Estonia"),
+    ("Lithuania", "Lithuania"),
+    ("Malta", "Malta"),
+    ("Cyprus", "Cyprus"),
+    ("Iceland", "Iceland"),
+    ("Liechtenstein", "Liechtenstein"),
+    ("Monaco", "Monaco"),
+    ("San Marino", "San Marino"),
+    ("Andorra", "Andorra"),
+    ("Albania", "Albania"),
+    ("Armenia", "Armenia"),
+    ("Azerbaijan", "Azerbaijan"),
+    ("Belarus", "Belarus"),
+    ("Bosnia and Herzegovina", "Bosnia and Herzegovina"),
+    ("Georgia", "Georgia"),
+    ("Kazakhstan", "Kazakhstan"),
+    ("Kosovo", "Kosovo"),
+    ("Macedonia", "Macedonia"),
+    ("Moldova", "Moldova"),
+    ("Montenegro", "Montenegro"),
+    ("Russia", "Russia"),
+    ("Serbia", "Serbia"),
+    ("Turkey", "Turkey"),
+    ("Ukraine", "Ukraine"),
+)
+
+SEASONS = (
+    ("Low", "Low"),
+    ("Mid", "Mid"),
+    ("High", "High"),  
+)
+
 
 class Plot(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    season = models.CharField(max_length=100, choices=SEASONS, default="Mid", blank=True, null=True)
     image = models.URLField(blank=True, null=True)
     plot = models.CharField(max_length=100)
-    tags = models.ForeignKey(Tag, on_delete=models.CASCADE, related_name="plots", blank=True, null=True)
     categories = models.CharField(max_length=25, choices=CATEGORIES, default=1)
     what3words = models.URLField(blank=True, null=True)
-    campsite = models.CharField(max_length=100)
-    country = models.ForeignKey(Country, on_delete=models.CASCADE, related_name="plots", blank=True, null=True)
+    campsite = models.CharField(max_length=100, blank=True, null=True)
+    countries = models.CharField(max_length=100, choices=COUNTRIES, default="Spain")
     list_date = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey("auth.User", on_delete=models.SET_NULL, null=True, related_name="plots")
     id = models.CharField(max_length=100, default=uuid.uuid4, unique=True, primary_key=True, editable=False)
@@ -58,11 +117,6 @@ class Plot(models.Model):
     
     class Meta:
         ordering = ["-list_date"]
-    
-    @property
-    def plotty(self):
-        try:
-            plotty = self.image.url
-        except:
-            plotty = static('images/default.jpg')
-        return plotty
+   
+
+

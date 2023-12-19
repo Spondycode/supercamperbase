@@ -21,13 +21,18 @@
                             {% else %}
                             <h3 class="btn btn-block btn-outline-info my-2 text-dark ">
                                 No owner</h3>
-
                             {% endif %}
                             <p class="text-truncate"><strong>Description:</strong> {{ plot.description }}</p>
-                            <ul>
-                                <li><strong>Campsite:</strong> {{ plot.campsite }}</li>
-                                <li><strong>Country:</strong> {{ plot.country }}</li>
-                            </ul>
+                            {% if plot.campsite %}
+                            <p><strong>Campsite:</strong> {{ plot.campsite }}</p>
+                            {% endif %}
+                            {% if plot.price %}
+                            <p><strong>Price:</strong> {{ plot.price }}</p>
+                            {% endif %}
+                            {% if plot.season%}
+                            <p><strong>Season:</strong> {{ plot.season }}</p>
+                            {% endif %}
+                            <p><strong>Country:</strong> {{ plot.country }}</p>
 
                             <a class="btn btn-info btn-sm col" href="{% url 'show_plot' plot.id %}">
                                 View Plot</a>

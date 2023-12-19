@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<body>
+    <div class="container-fluid ">
+
+        <div class="row">
+            <div class="col-lg-8 ">
+                <div class="container col-lg-10">
+                    <div class="row row-cols-md">
+                        {% for plot in plots %}
+                        <div class="col-md-6">
+                            <div class=" card shadow m-2 p-2">
+                                <h3 class="text-center"><i class="bi bi-emoji-sunglasses text-primary"></i>
+                                    {{ plot.title }}</h3>
+
+                                {% if plot.owner %}
+                                <h3 class="btn btn-block btn-outline-info my-2 text-dark ">
+                                    Super Camper: {{ plot.owner.profile.realname }} - User Name - {{ plot.owner }}</h3>
+                                {% else %}
+                                <h3 class="btn btn-block btn-outline-info my-2 text-dark ">
+                                    No owner</h3>
+
+                                {% endif %}
+                                <p class="text-truncate"><strong>Description:</strong> {{ plot.description }}</p>
+                                <ul>
+                                    <li><strong>Campsite:</strong> {{ plot.campsite }}</li>
+                                    <li><strong>Country:</strong> {{ plot.country }}</li>
+                                </ul>
+                                <figure>
+                                    <a href="#"><img class="w-100" src="{{ plot.image }}" alt=""></a>
+                                </figure>
+                                <a class="btn btn-info btn-sm col" href="{% url 'show_plot' plot.id %}">
+                                    View Plot</a>
+                                <hr>
+                                <div>
+                                    <a class="btn btn-secondary btn-sm" href="">
+                                        {{ plot.categories }}
+                                        
+
+                                    </a>
+                                    <!-- add a link to the category_view -->
+                                </div>
+                            </div>
+
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class=" col-lg-3 ">
+                <div class=" row row-cols-md">
+                    <h3 class="text-center">Super Campista !</h3>
+                    <div class=" m-4">
+                        <div class="col ">
+
+                            {% include 'includes/search.html' %}
+
+                            {% include 'includes/categories.html' %}
+
+                            {% include 'includes/aside1.html' %}
+
+                            {% include 'includes/aside2.html' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+    {% include 'includes/showcase.html' %}
+
+    {% include 'includes/questions.html' %}
+
+
+    {% endblock content %}
+
+</body>
+
+</html>

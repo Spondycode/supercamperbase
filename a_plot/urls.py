@@ -10,4 +10,6 @@ urlpatterns = [
     path("myplots/", my_plots_view, name="my_plots"),
     path("search_plots/", search_plots_view, name="search_plots"),
     path("search_categories/", search_categories_view, name="search_categories"),
+    path("search_countries/", search_countries_view, name="search_countries"),
+    path("country/<plot_country>/", country_view, name="country"),
 ]
