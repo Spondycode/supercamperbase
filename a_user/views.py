@@ -1,7 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.urls import reverse
+from django.contrib import messages
 from django.contrib.auth import logout
 from a_plot.views import *
 from .forms import *
+
 
 #Logout the logged in user
 def logout_view(request):
@@ -26,6 +30,7 @@ def profile_view(request):
     
 
 # Edit the profile of the logged in user
+@login_required
 def profile_edit_view(request):
     if request.user.is_authenticated:
         profile = request.user.profile
@@ -35,16 +40,19 @@ def profile_edit_view(request):
             "profile": profile,
         }
         if request.method == "POST":
-            form = ProfileAddForm(request.POST, request.FILES, instance=profile)
+            form = ProfileAddForm(request.POST, request.FILES, instance=request.user.profile)
             if form.is_valid():
                 form.save()
                 messages.success(request, "Profile updated successfully")
                 return redirect("profile")
-        return render(request, "a_user/profile_edit.html", context)
+            
+        if request.path == reverse("profile-onboarding"):
+            template = "a_user/profile_onboarding.html"
+        else:
+            template = "a_user/profile_edit.html"
+        return render(request, template, "a_user/profile_edit.html", context)
         
-    else:
-        messages.success(request, "You need to login first")
-        return redirect("/login")
+    
     
     
     #create a view to create a profile
@@ -70,6 +78,7 @@ def profile_create_view(request):  # Create a new profile
     
     
 # Delete a Profile
+@login_required
 def profile_delete_view(request):
     user = request.user
     
