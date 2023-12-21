@@ -5,7 +5,8 @@ from django.forms import ModelForm
 from django import forms # for add_plot_view
 from .forms import *
 from django.contrib import messages 
-from django.contrib.auth import login, logout, authenticate 
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required   
 
 # def home_view(request, tag=None):
 #     if tag:
@@ -53,6 +54,7 @@ def plot_view(request, plot_id):
     return render(request, "a_plots/plotpage.html", context)
 
 # Add a plot
+@login_required
 def add_plot_view(request):
     submitted = False
     if request.method == "POST":
@@ -74,6 +76,7 @@ def add_plot_view(request):
     return render(request, "a_plots/add_plot.html", context)
 
 # To delete the plot, we need to get the plot id from the URL, then get the plot from the database, and then delete it.
+@login_required
 def delete_plot_view(request, pk):
     plot = Plot.objects.get(id=pk)
     context = {
@@ -88,6 +91,7 @@ def delete_plot_view(request, pk):
 
 
 # To edit a plot, we need to get the plot id from the URL, then get the plot from the database, and then edit it.
+@login_required
 def edit_plot_view(request, pk):
     plot = Plot.objects.get(id=pk)
     form = PlotAddForm(instance=plot)

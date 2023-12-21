@@ -22,8 +22,9 @@ class PlotEditForm(ModelForm):
         
 class RegisterForm(UserCreationForm):
     email = forms.EmailField(required=True)
-    nationality = forms.CharField(max_length=100, required=True)
+    # nationality = forms.CharField(max_length=100, required=True)
+    # test = forms.CharField(max_length=100, required=True)
     
     class Meta:
         model = User 
-        fields = ["username", "nationality", "email", "password1", "password2"]
+        fields = ["username", "email", "password1", "password2"]

@@ -38,9 +38,8 @@ CATEGORIES_PARAMS = {
 }
 
 COUNTRIES = (
-    ("United Kingdom", "United Kingdom"),
-    ("France", "France"),
     ("Spain", "Spain"),
+    ("France", "France"),
     ("Portugal", "Portugal"),
     ("Italy", "Italy"),
     ("Germany", "Germany"),
@@ -48,6 +47,7 @@ COUNTRIES = (
     ("Ireland", "Ireland"),
     ("Belgium", "Belgium"),
     ("Greece", "Greece"),
+    ("United Kingdom", "United Kingdom"),
     ("Switzerland", "Switzerland"),
     ("Austria", "Austria"),
     ("Sweden", "Sweden"),
