@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
+from django.contrib import messages
 from a_plot.views import *
 from .forms import *
+from django.contrib.auth.decorators import login_required   
+
 
 #Logout the logged in user
 def logout_view(request):
