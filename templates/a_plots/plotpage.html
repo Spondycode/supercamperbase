@@ -1,4 +1,5 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
+{% load crispy_forms_tags %}
 
 <div class=" container mt-3">
     <div class="row">
@@ -44,8 +45,23 @@
                     {% endif %}
                 </div>
             </div>
+            <br>
+            <hr>
+            <div class="col mt-5">
+                <div class="card shadow">
+                    <h3 class="text-center">Add a Comment</h3>
+                    <div class="container">
+                        <form method="POST", action="{% url 'comment_sent' plot.id %}">
+                            {% csrf_token %}
+                            {{ commentform|crispy }}
+                            <button class="btn btn-primary mb-2" type="submit">Add Comment</button>
+                        </form>
+                    </div>
+                </div>
 
-            <div class="mt-4" id="tab-contents">
+            </div>
+
+            <div class="col mt-4" id="tab-contents">
                 <h3 class="text-center">Comments</h3>
                 {% for comment in plot.comments.all %}
 

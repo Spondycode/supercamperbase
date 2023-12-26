@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 from .models import *
 from django.forms import ModelForm
 from django import forms # for add_plot_view
@@ -52,13 +53,29 @@ def about_view(request):
 
 def plot_view(request, plot_id):
     plot = Plot.objects.get(id=plot_id)
-    
     commentform = CommentCreateForm()
     context = {
         "plot": plot,
         "commentform": commentform,
     }
     return render(request, "a_plots/plotpage.html", context)
+
+
+
+# Comment sent function
+@login_required
+def comment_sent(request, pk):
+    plot = get_object_or_404(Plot, id=pk)
+    
+    if request.method == "POST":
+        form = CommentCreateForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.author = request.user # get the logged in user
+            comment.parent_plot = plot
+            comment.save()
+        
+    return redirect("show_plot", plot_id=pk)
 
 
 

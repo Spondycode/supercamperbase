@@ -12,4 +12,5 @@ urlpatterns = [
     path("search_categories/", search_categories_view, name="search_categories"),
     path("search_countries/", search_countries_view, name="search_countries"),
     path("country/<plot_country>/", country_view, name="country"),
+    path("commentsent/<pk>", comment_sent, name="comment_sent"),
 ]
