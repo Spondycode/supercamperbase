@@ -28,3 +28,15 @@ class RegisterForm(UserCreationForm):
     class Meta:
         model = User 
         fields = ["username", "email", "password1", "password2"]
+        
+        
+class CommentCreateForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = ["body"]
+        widgets = {
+            "body": forms.TextInput(attrs={'placeholder': 'Add a comment...'}),
+        }
+        labels = {
+            "body": "",
+        }

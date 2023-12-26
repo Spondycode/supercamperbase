@@ -13,7 +13,9 @@
                     {% else %}
                     <h3 class="btn btn-block btn-outline-info my-2 text-dark ">
                         No owner</h3>
-
+                    <a class="btn btn-secondary btn-sm text-center" href="">
+                        {{ plot.categories }}
+                    </a>
                     {% endif %}
                     <p class="text-truncate"><strong>Description:</strong> {{ plot.description }}</p>
                     <p><strong>Campsite:</strong> {{ plot.campsite }}</p>
@@ -27,12 +29,10 @@
                         View Plot</a>
                     <hr>
                     <div>
-                        <a class="btn btn-secondary btn-sm" href="">
-                            {{ plot.categories }}
 
-
-                        </a>
                         <!-- add a link to the category_view -->
+
+
                     </div>
                 </div>
 

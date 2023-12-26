@@ -46,12 +46,22 @@ def about_view(request):
     }
     return render(request, "about.html", context)
 
+
+
+
+
 def plot_view(request, plot_id):
     plot = Plot.objects.get(id=plot_id)
+    
+    commentform = CommentCreateForm()
     context = {
         "plot": plot,
+        "commentform": commentform,
     }
     return render(request, "a_plots/plotpage.html", context)
+
+
+
 
 # Add a plot
 @login_required

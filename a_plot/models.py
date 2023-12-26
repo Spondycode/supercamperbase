@@ -2,29 +2,7 @@ from django.db import models
 import uuid
 from django.templatetags.static import static
 
-class Country(models.Model):
-    name = models.CharField(max_length=100)
 
-    def __str__(self):
-        return self.name
-    
-    # take care od the plural form of the model name
-    class Meta:
-        verbose_name_plural = "Countries"
-        
-
-class Tag(models.Model):
-    name = models.CharField(max_length=20)
-    image = models.FileField(upload_to="icons/", blank=True, null=True)
-    slug = models.SlugField(max_length=20, unique=True)
-
-    def __str__(self):
-        return self.name
-    
-    class Meta:
-        verbose_name_plural = "Tags"        
-           
-           
 CATEGORIES = (
     ("Campsite", "Campsite"),
     ("Official", "Official"),
@@ -97,6 +75,34 @@ SEASONS = (
 )
 
 
+
+
+
+class Country(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+    
+    # take care od the plural form of the model name
+    class Meta:
+        verbose_name_plural = "Countries"
+        
+
+class Tag(models.Model):
+    name = models.CharField(max_length=20)
+    image = models.FileField(upload_to="icons/", blank=True, null=True)
+    slug = models.SlugField(max_length=20, unique=True)
+
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name_plural = "Tags"        
+
+
+
+
 class Plot(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
@@ -117,6 +123,23 @@ class Plot(models.Model):
     
     class Meta:
         ordering = ["-list_date"]
-   
 
+
+
+
+
+
+class Comment(models.Model):
+    author = models.ForeignKey("auth.User", on_delete=models.SET_NULL, null=True, related_name="comments")
+    parent_plot = models.ForeignKey(Plot, on_delete=models.CASCADE, related_name="comments")
+    body = models.CharField(max_length=600)
+    created = models.DateTimeField(auto_now_add=True)
+    id = models.CharField(max_length=100, default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+    
+    def __str__(self):
+        try:
+            return f'{self.author.username} : {self.body[:20]}... '
+        except:
+            return f'no author : {self.body[:20]}... '
+    
 

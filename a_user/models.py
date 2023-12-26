@@ -1,6 +1,19 @@
 from django.db import models
 from django.contrib.auth.models import User
-   
+
+
+MODES = (
+    ("Hammock", "Hammock"),
+    ("Small Tent", "Small Tent"),
+    ("Large Tent", "Large tent"),
+    ("Car", "Car"),
+    ("Van", "Van"),
+    ("CamperVan", "CamperVan"),
+    ("Motorhome", "Motorhome"),
+    ("Caravan", "Caravan"),
+    ("Under the Stars", "Under the Stars"),
+)
+
 
 
 class Profile(models.Model):
@@ -10,7 +23,7 @@ class Profile(models.Model):
     email = models.EmailField(max_length=254, null=True, unique=True)
     created = models.DateTimeField(auto_now_add=True)
     nationality = models.CharField(max_length=20, null=True, blank=True)
-    campermode = models.CharField(max_length=20, null=True, blank=True)
+    campermode = models.CharField(max_length=20, choices=MODES, default="Hammock", null=True, blank=True)
     camperstory = models.TextField(null=True, blank=True)
     
     def __str__(self):

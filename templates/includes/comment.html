@@ -1,0 +1,16 @@
+{% load static %}
+<comment class="card shadow">
+    <div class="card-body">
+        {% if comment.author%}
+
+        <p><span class="strong">Comment by:</span> {{ comment.author.username }}
+        <p>
+            {% else %}
+        <p>No Author</p>
+        {% endif %}
+        <p>Date : {{ comment.created }}
+        <p>
+        <p> {{ comment.body }}</p>
+
+    </div>
+</comment>
