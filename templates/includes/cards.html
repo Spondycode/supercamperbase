@@ -28,6 +28,8 @@
                     <a class="btn btn-info btn-sm col" href="{% url 'show_plot' plot.id %}">
                         View Plot</a>
                     <hr>
+
+                    <p class="mt-2"> <strong>Comments:</strong> <span class="">{{ plot.comments.count }}</span></p>
                     <div>
 
                         <!-- add a link to the category_view -->

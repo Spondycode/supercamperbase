@@ -7,7 +7,8 @@ from django import forms # for add_plot_view
 from .forms import *
 from django.contrib import messages 
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.decorators import login_required   
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 # def home_view(request, tag=None):
 #     if tag:
@@ -87,6 +88,8 @@ def add_plot_view(request):
     if request.method == "POST":
         form = PlotAddForm(request.POST)
         if form.is_valid():
+            plot = form.save(commit=False)
+            plot.user = request.user # get the logged in user
             form.save()
             return HttpResponseRedirect("/?submitted=True")
         else:

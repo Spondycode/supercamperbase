@@ -141,5 +141,6 @@ class Comment(models.Model):
             return f'{self.author.username} : {self.body[:20]}... '
         except:
             return f'no author : {self.body[:20]}... '
-    
-
+        
+    class Meta:
+        ordering = ["-created"]
