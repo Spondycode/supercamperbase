@@ -31,10 +31,15 @@
 
                     {% if plot.comments.count %}
 
-
                     <p class="mt-2"> <strong>Comments:</strong> <span class="">{{ plot.comments.count }}</span></p>
                     {% endif %}
                     <div>
+
+                        {% if comment.replies.count %}
+
+                        <p><strong>Replies: </strong> <span>{{ comment.replies.count }}</span></p>
+
+                        {% endif %}
 
                         <!-- add a link to the category_view -->
 

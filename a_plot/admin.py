@@ -3,4 +3,4 @@ from .models import *
 
 admin.site.register(Plot)
 admin.site.register(Comment)
-# admin.site.register(Tag) safe let's go comment pan
+admin.site.register(Reply)
