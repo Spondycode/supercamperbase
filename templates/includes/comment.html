@@ -12,7 +12,11 @@
         <p>
         <p> {{ comment.body }}</p>
 
+        {% if user.is_authenticated and comment.author == user %}
+
         <a class="btn btn-danger" href="{% url 'delete_comment' comment.id %}">Delete</a>
+        {% endif %}
+
 
     </div>
 </comment>
