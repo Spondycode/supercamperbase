@@ -1,7 +1,15 @@
 <reply class="d-flex items-end justify-between py-3 border-t">
     <div class="flex">
+
+        {% if reply.author %}
+
         <h6 class="badge bg-info-subtle text-dark">Reply....{{ reply.author.username }}</h6>
         <span class="text-gray-600 text-xs">{{ reply.created }}</span>
+        {% else %}
+        <span>No Author</span>
+        {% endif %}
+
+
         <div>
             <p class="text-center">{{ reply.body }}</p>
         </div>

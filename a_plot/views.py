@@ -55,9 +55,11 @@ def about_view(request):
 def plot_view(request, plot_id):
     plot = Plot.objects.get(id=plot_id)
     commentform = CommentCreateForm()
+    replyform = ReplyCreateForm()
     context = {
         "plot": plot,
         "commentform": commentform,
+        "replyform": replyform,
     }
     return render(request, "a_plots/plotpage.html", context)
 
@@ -77,6 +79,23 @@ def comment_sent(request, pk):
             comment.save()
         
     return redirect("show_plot", plot_id=pk)
+
+
+
+@login_required
+def reply_sent(request, pk):
+    comment = get_object_or_404(Comment, id=pk)
+    
+    if request.method == "POST":
+        form = ReplyCreateForm(request.POST)
+        if form.is_valid():
+            reply = form.save(commit=False)
+            reply.author = request.user # get the logged in user
+            reply.parent_comment = comment
+            reply.save()
+        
+    return redirect("show_plot", comment.parent_plot.id)
+
 
 
 @login_required

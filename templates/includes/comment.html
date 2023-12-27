@@ -1,15 +1,17 @@
 {% load static %}
+{% load crispy_forms_tags %}
 <comment class="card shadow mt-2">
     <div class="card-body">
         {% if comment.author%}
 
-        <p><span class="strong badge bg-primary-subtle text-dark">Comment by:</span> {{ comment.author.username }}
+        <p class="badge bg-primary-subtle text-dark"><span class="strong ">Comment by:</span>
+            {{ comment.author.username}}
         <p>
             {% else %}
         <p>No Author</p>
         {% endif %}
-        <p><span class="strong badge bg-primary-subtle text-dark">Date :</span> {{ comment.created }}
-        <p>
+        <p class="badge bg-primary-subtle text-dark"><span class="strong ">Date :</span> {{ comment.created }}
+        </p>
         <p> {{ comment.body }}</p>
 
         {% if user.is_authenticated and comment.author == user %}
@@ -32,17 +34,26 @@
 
             {% endif %}
 
+            {% endif %}
 
             <div class="mx-3">
                 {% for reply in comment.replies.all %}
                 {% include 'a_plots/reply.html' %}
                 {% endfor %}
+
+                
             </div>
-
+            
         </div>
-
-        {% endif %}
-
+        
+        
+        <div class="container">
+            <form method="POST" action="{% url 'reply_sent' comment.id %}">
+                {% csrf_token %}
+                {{ replyform|crispy }}
+                <button class="btn btn-info block mb-3">Submit</button>
+            </form>
+        </div>
 
     </div>
 </comment>
