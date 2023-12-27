@@ -15,4 +15,5 @@ urlpatterns = [
     path("commentsent/<pk>", comment_sent, name="comment_sent"),
     path("delete_comment/<pk>", delete_comment, name="delete_comment"),
     path("replysent/<pk>", reply_sent, name="reply_sent"),
+    path("delete_reply/<pk>", delete_reply, name="delete_reply"),
 ]

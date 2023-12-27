@@ -114,6 +114,21 @@ def delete_comment(request, pk):
 
 
 
+@login_required
+def delete_reply(request, pk):
+    reply = get_object_or_404(Reply, id=pk, author=request.user)
+    context = {
+        "reply": reply,
+    }
+    
+    if request.method == "POST":
+        reply.delete()
+        messages.success(request, "Reply deleted successfully")
+        return redirect("show_plot", reply.parent_comment.parent_plot.id)
+    
+    return render(request, "a_plots/delete_reply.html", context)
+
+
 
 
 # Add a plot

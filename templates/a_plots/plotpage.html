@@ -52,8 +52,6 @@
             <br>
 
             {% if user.is_authenticated %}
-
-
             <div class="col mt-5">
                 <div class="card bg-danger-subtle shadow">
                     <div class="container mt-2">
@@ -70,14 +68,15 @@
 
             {% else %}
             <h3 class="text-center"><a href="{% url 'login' %}">Login</a> If You Want to Make a Comment</h3>
-            {% endif %}
-
             
-            <div class="col mt-4" id="tab-contents">
-                <h3 class="text-center">Comments</h3>
+            
+            <div class="col my-4" id="tab-contents">
+                <h3 class="text-center bg-primary-subtle py-3">Comments</h3>
+                {% endif %}
                 {% for comment in plot.comments.all %}
 
                 {% include 'includes/comment.html' %}
+                <br>
 
                 {% endfor %}
             </div>

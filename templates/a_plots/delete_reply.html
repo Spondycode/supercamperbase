@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="container">
+    <h1>Delete Reply</h1>
+    
+    {% include 'a_plots/reply.html' %}
+    
+    <p class="my-3">Are you sure you want to delete this reply?</p>
+    
+    <form action="" method="POST">
+        {% csrf_token %}
+        <button class="btn btn-info">Confirm</button>
+        <a class="btn btn-secondary" href="{{ request.META.HTTP_REFERER }}">Cancel</a>
+    </form>
+</div>
+
+
+{% endblock content %}

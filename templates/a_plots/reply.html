@@ -3,8 +3,8 @@
 
         {% if reply.author %}
 
-        <h6 class="badge bg-info-subtle text-dark">Reply....{{ reply.author.username }}</h6>
-        <span class="text-gray-600 text-xs">{{ reply.created }}</span>
+        <h3 class="badge bg-info-subtle text-dark">Reply....{{ reply.author.username }}</h3>
+        <span class="text-dark">{{ reply.created }}</span>
         {% else %}
         <span>No Author</span>
         {% endif %}
@@ -13,5 +13,12 @@
         <div>
             <p class="text-center">{{ reply.body }}</p>
         </div>
+
+        {% if user.is_authenticated and reply.author == user%}
+
+        <a class="btn btn-sm bg-info-subtle" href="{% url 'delete_reply' reply.id %}">Delete Reply</a>
+        {% endif %}
+
+
     </div>
 </reply>

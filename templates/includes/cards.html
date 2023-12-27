@@ -4,8 +4,20 @@
             {% for plot in plots %}
             <div class="col-md-6">
                 <div class=" card shadow m-2 p-2">
-                    <h3 class="text-center"><i class="bi bi-emoji-sunglasses text-primary"></i>
-                        {{ plot.title }}</h3>
+
+
+
+                    <h3 class="text-center"><i class="bi bi-emoji-sunglasses text-primary"></i> {{ plot.title }}</h3>
+                    <a class=" btn 
+                            {% if plot.categories == 'Campsite' %}
+                            btn-primary {% endif %}
+                            {% if plot.categories == 'Wild' %}
+                            btn-success {% endif %}
+                            {% if plot.categories == 'Official' %}
+                            btn-primary {% endif %}
+                            btn-sm" href="">
+                        {{ plot.categories }} </a>
+
 
                     {% if plot.owner %}
                     <h3 class="btn btn-block btn-outline-info my-2 text-dark ">

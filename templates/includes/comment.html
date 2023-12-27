@@ -10,29 +10,30 @@
             {% else %}
         <p>No Author</p>
         {% endif %}
-        <p class="badge bg-primary-subtle text-dark"><span class="strong ">Date :</span> {{ comment.created }}
-        </p>
+        <span class="badge bg-primary-subtle text-dark"><span class="strong ">Date :</span> {{ comment.created }}
+        </span>
+
         <p> {{ comment.body }}</p>
 
-        {% if user.is_authenticated and comment.author == user %}
 
         <div>
             <div class="container">
 
                 <div class="col text-end">
-                    <a class="btn btn-danger btn-sm" href="{% url 'delete_comment' comment.id %}">Delete
+                    <!-- Only allow delete by author -->
+                    {% if user.is_authenticated and comment.author == user %}
+                    <a class="btn bg-primary-subtle btn-sm shadow " href="{% url 'delete_comment' comment.id %}">Delete
                         Comment</a>
+                    {% endif %}
                 </div>
             </div>
 
             <hr>
 
-            {% if comment.replies.count %}
-            <h5>Replies: {{ comment.replies.count }}</h5>
+            {% if comment.replies.count and user.is_authenticated%}
+            <h5 class="text-center bg-info-subtle py-2">Replies: {{ comment.replies.count }}</h5>
             {% else %}
-            <span>Add a Reply</span>
-
-            {% endif %}
+            <!-- <span>Add a Reply</span> -->
 
             {% endif %}
 
@@ -41,17 +42,21 @@
                 {% include 'a_plots/reply.html' %}
                 {% endfor %}
             </div>
-                
+
         </div>
-        
-        
-        <div class="container">
-            <form method="POST" action="{% url 'reply_sent' comment.id %}">
+
+
+        {% if user.is_authenticated %}
+
+
+        <div class="container card bg-info-subtle">
+            <form class="mt-2" method="POST" action="{% url 'reply_sent' comment.id %}">
                 {% csrf_token %}
                 {{ replyform|crispy }}
-                <button class="btn btn-info block mb-3">Submit</button>
+                <button class="btn btn-info block mb-3 shadow">Submit</button>
             </form>
         </div>
+        {% endif %}
 
     </div>
 </comment>
