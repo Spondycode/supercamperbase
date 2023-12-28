@@ -4,3 +4,4 @@ from .models import *
 admin.site.register(Plot)
 admin.site.register(Comment)
 admin.site.register(Reply)
+admin.site.register(LikedPlot)

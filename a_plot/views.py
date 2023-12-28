@@ -278,3 +278,12 @@ def search_countries_view(request):
     }
     
     return render(request, "a_plots/country_search.html", context)
+
+
+def like_plot(request, pk):
+    plot = get_object_or_404(Plot, id=pk)
+    
+    if plot.owner != request.user:
+        plot.likes.add(request.user)
+        
+    return redirect("show_plot", plot_id=pk)

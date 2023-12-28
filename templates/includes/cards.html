@@ -47,6 +47,12 @@
                     {% endif %}
                     <div>
 
+                        {% if plot.likes.count %}
+
+                        <p><strong>Likes:</strong> {{ plot.likes.count }}</p>
+                        {% endif %}
+
+
                         {% if comment.replies.count %}
 
                         <p><strong>Replies: </strong> <span>{{ comment.replies.count }}</span></p>

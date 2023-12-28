@@ -34,9 +34,22 @@
                     {% endif %}
                 </div>
 
+
+                
+                <p>
+                    Likes: {{ plot.likes.count }} {% if user.is_authenticated and user != plot.author %}
+                    <a class="btn btn-sm btn-dark" href="{% url 'like_plot' plot.id %}">Add a Like</a>
+                </p>
+                    
+                {% endif %}
+                
+                
                 <figure>
                     <a href="#"><img class="w-100" src="{{ plot.image }}" alt=""></a>
                 </figure>
+
+
+
                 <div class="d-flex gap-2">
 
                     {% if user.is_authenticated and user == plot.owner %}

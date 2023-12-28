@@ -110,6 +110,7 @@ class Plot(models.Model):
     season = models.CharField(max_length=100, choices=SEASONS, default="Mid", blank=True, null=True)
     image = models.URLField(blank=True, null=True)
     plot = models.CharField(max_length=100)
+    likes = models.ManyToManyField("auth.User", related_name="likedplots", through="LikedPlot")
     categories = models.CharField(max_length=25, choices=CATEGORIES, default=1)
     what3words = models.URLField(blank=True, null=True)
     campsite = models.CharField(max_length=100, blank=True, null=True)
@@ -125,6 +126,13 @@ class Plot(models.Model):
         ordering = ["-list_date"]
 
 
+class LikedPlot(models.Model):
+    plot = models.ForeignKey(Plot, on_delete=models.CASCADE)
+    user = models.ForeignKey("auth.User", on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f'{self.user.username} : {self.plot.title}'
 
 
 # Comments and replies
