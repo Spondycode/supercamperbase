@@ -1,0 +1,17 @@
+<div class="mb-2">
+    <h5>
+        <i class="bi bi-balloon-heart-fill"></i> Likes: <span id="like-{{comment.id}}">
+            {{ comment.likes.count}}</span>
+    </h5>
+    {% if user.is_authenticated and user != comment.author %}
+        <a class="btn btn-sm btn-secondary cursor-pointer" 
+        hx-get="{% url 'like_comment' comment.id %}"
+        hx-target="#like-{{comment.id}}" 
+        hx-swap="innerHTML">
+    
+            Like
+    
+    
+        </a>
+        {% endif %}
+</div>

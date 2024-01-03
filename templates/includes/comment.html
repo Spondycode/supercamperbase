@@ -20,6 +20,8 @@
             <div class="container">
 
                 <div class="col text-end">
+
+                    {% include 'snippets/likes_comment.html' %}
                     <!-- Only allow delete by author -->
                     {% if user.is_authenticated and comment.author == user %}
                     <a class="btn bg-primary-subtle btn-sm shadow " href="{% url 'delete_comment' comment.id %}">Delete
@@ -46,8 +48,8 @@
         </div>
 
 
+        <!-- Add a Reply -->
         {% if user.is_authenticated %}
-
 
         <div class="container card bg-info-subtle">
             <form class="mt-2" method="POST" action="{% url 'reply_sent' comment.id %}">

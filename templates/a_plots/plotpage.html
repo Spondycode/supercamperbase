@@ -6,13 +6,11 @@
         <div class="col-md-8">
             <div class="card shadow m-2 p-2">
                 <div class="row text-center">
-                    <!-- <h3 class="col-sm-8"><i class="bi bi-emoji-sunglasses text-primary"></i> {{ plot.title }}</h3>
-                    <a class="col-sm-2 btn btn-secondary btn-sm" href="">
-                        {{ plot.categories }} </a> -->
 
-                        <h3 class="col-lg-6 text-center mt-2"><i class="bi bi-emoji-sunglasses text-primary"></i> {{ plot.title }}</h3>
-                        <div class="col-lg-6 container">
-                            <a class=" btn mt-3 px-3
+                    <h3 class="col-lg-6 text-center mt-2"><i class="bi bi-emoji-sunglasses text-primary"></i>
+                        {{plot.title }}</h3>
+                    <div class="col-lg-6 container">
+                        <a class=" btn mt-3 px-3
                                     {% if plot.categories == 'Campsite' %}
                                     btn-primary {% endif %}
                                     {% if plot.categories == 'Wild' %}
@@ -20,14 +18,23 @@
                                     {% if plot.categories == 'Official' %}
                                     btn-primary {% endif %}
                                     btn-sm" href="">
-                                {{ plot.categories }} </a>
-                        </div>
+                            {{ plot.categories }} </a>
+                    </div>
 
 
 
                 </div>
                 <hr>
+                <!-- Plot image -->
+                <figure>
+                    {% if plot.image %}
 
+                    <a href="#"><img class="w-100" src="{{ plot.image }}" alt="Picture of the plot"></a>
+                    {% else %}
+                    <a href="#"><img class="w-100" src="{% static 'images/default.jpg' %}" alt="Default image"></a>
+                    {% endif %}
+
+                </figure>
                 <p class="text-truncate"><strong>Description:</strong> {{ plot.description }}</p>
 
                 <p><strong>Campsite:</strong> {{ plot.campsite }}</p>
@@ -35,39 +42,48 @@
                 <p><strong>Country:</strong> {{ plot.country }}</p>
 
                 {% if plot.what3words is not None %}
+                <p><strong>What3Words:</strong> <a href="{{ plot.what3words }}"> Get Directions</a> </p>
                 <p class="p-3">Here is a precise what3words address, made of 3 random words. Every 3 metre square in
                     the world has its own unique what3words address.</p>
-                <p><strong>What3Words:</strong> <a href="{{ plot.what3words }}"> Get Directions</a> </p>
                 {% endif %}
+
+                
+                {% if user != plot.owner %}
+                    
                 <p><strong>Plot Poster:</strong> {{ plot.owner }} </p>
                 <p><strong>Real Name:</strong> {{ plot.owner.profile.realname }} </p>
+                {% endif %}
+                    
 
                 <div>
                     {% if plot.comments.count %}
-                    <h5 class="mt-2"> <i class="bi bi-megaphone-fill text-color-primary "></i> Comments: <span class="">{{ plot.comments.count }}</span></h5>
+                    <h5 class="mt-2"> <i class="bi bi-megaphone-fill text-color-primary "></i> Comments: <span
+                            class="">{{ plot.comments.count }}</span></h5>
                     {% else %}
-                    <p class="mt-2">Add a Comment below..</p> 
+                    <p class="mt-2">Add a Comment below..</p>
                     {% endif %}
                 </div>
 
-<!-- All about Likes -->
+                <!-- All about Likes -->
                 <h5>
-                    
-                    <i class="bi bi-balloon-heart-fill"></i> Likes: {{ plot.likes.count }} </h5>
+                    <i class="bi bi-balloon-heart-fill"></i> Likes: <span id="like-{{plot.id}}">
+                        {{ plot.likes.count}}</span>
+                </h5>
                 <p>
-                     {% if user.is_authenticated and user != plot.author %}
-                    <a class="btn btn-sm btn-secondary" href="{% url 'like_plot' plot.id %}">Add a Like</a>
+                    {% if user.is_authenticated and user != plot.owner %}
+                    <a class="btn btn-sm btn-secondary cursor-pointer" hx-get="{% url 'like_plot' plot.id %}"
+                        hx-target="#like-{{plot.id}}" hx-swap="innerHTML">
+
+                        Like
+
+
+                    </a>
+                    {% endif %}
                 </p>
-                    
-                {% endif %}
-                
-<!-- Plot image -->
-                <figure>
-                    <a href="#"><img class="w-100" src="{{ plot.image }}" alt=""></a>
-                </figure>
 
 
-                
+
+
 
                 <div class="d-flex gap-2">
 
@@ -96,12 +112,12 @@
                 </div>
 
             </div>
-            
+
 
             {% else %}
             <h3 class="text-center"><a href="{% url 'login' %}">Login</a> If You Want to Make a Comment</h3>
-            
-            
+
+
             <div class="col my-4" id="tab-contents">
                 <h3 class="text-center bg-primary-subtle py-3">Comments</h3>
                 {% endif %}
@@ -112,17 +128,17 @@
 
                 {% endfor %}
             </div>
-            
+
             <div class="col-md-4">
                 <div class="row row-cols-md">
                     <div class=" m-2 p-2">
                         {% include 'includes/aside1.html' %}
-                        
+
                         {% include 'includes/aside2.html' %}
                     </div>
                 </div>
             </div>
-            
+
         </div>
 
 
