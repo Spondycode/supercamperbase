@@ -4,6 +4,7 @@
     <div class="card-body">
         {% if comment.author%}
 
+
         <div class="d-flex flex-row justify-content-between">
             <p class="badge bg-primary-subtle text-dark"><span class="strong ">Comment by:</span>
                 {{ comment.author.username}}
@@ -18,25 +19,33 @@
         <p> {{ comment.body }}</p>
 
 
-        <div>
-            <div class="container">
 
-                <div class="col text-end">
-                    <!-- Only allow delete by author -->
-                    {% if user.is_authenticated and comment.author == user %}
-                    <a class="btn bg-primary-subtle btn-sm shadow " href="{% url 'delete_comment' comment.id %}">Delete
-                        Comment</a>
-                    {% endif %}
-                </div>
-            </div>
+                <div>
+                    <div class="container">
 
-            <hr>
+                        <div class="col text-end">
+
+                            {% include 'snippets/likes_comment.html' %}
+                            <!-- Only allow delete by author -->
+                            {% if user.is_authenticated and comment.author == user %}
+                            <a class="btn bg-primary-subtle btn-sm shadow "
+                                href="{% url 'delete_comment' comment.id %}">Delete
+                                Comment</a>
+                            {% endif %}
+                        </div>
+                    </div>
+
 
             {% if comment.replies.count and user.is_authenticated%}
             <h5 class="text-center text-primary bg-info-subtle py-2 border border-info rounded">Replies: {{ comment.replies.count }}
             </h5>
 
-            {% endif %}
+
+                    {% if comment.replies.count and user.is_authenticated%}
+                    <h5 class="text-center bg-info-subtle py-2">Replies: {{ comment.replies.count }}</h5>
+                    {% else %}
+                    <!-- <span>Add a Reply</span> -->
+
 
             <div class="m-4">
                 {% for reply in comment.replies.all %}
@@ -44,10 +53,18 @@
                 {% endfor %}
             </div>
 
-        </div>
+
+                    <div class="mx-3">
+                        {% for reply in comment.replies.all %}
+                        {% include 'a_plots/reply.html' %}
+                        {% endfor %}
+                    </div>
+
+                </div>
 
 
-        {% if user.is_authenticated %}
+                <!-- Add a Reply -->
+                {% if user.is_authenticated %}
 
 
         <div class="container card bg-info-subtle border-info">
@@ -59,5 +76,7 @@
         </div>
         {% endif %}
 
+            </div>
+        </div>
     </div>
 </comment>

@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from .models import *
 from django.forms import ModelForm
@@ -139,7 +140,7 @@ def add_plot_view(request):
         form = PlotAddForm(request.POST, request.FILES)
         if form.is_valid():
             plot = form.save(commit=False)
-            plot.user = request.user # get the logged in user
+            plot.owner = request.user # get the logged in user
             form.save()
             return HttpResponseRedirect("/?submitted=True")
         else:
@@ -294,4 +295,17 @@ def like_plot(request, pk):
         else:
             plot.likes.add(request.user)
         
-    return redirect("show_plot", plot_id=pk)
+    return HttpResponse(plot.likes.count() )
+
+
+def like_comment(request, pk):
+    comment = get_object_or_404(Comment, id=pk)
+    user_exists = comment.likes.filter(username=request.user.username).exists()
+   
+    if comment.author != request.user:
+        if user_exists:
+            comment.likes.remove(request.user)
+        else:
+            comment.likes.add(request.user)
+        
+    return HttpResponse(comment.likes.count() )

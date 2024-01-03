@@ -6,8 +6,10 @@
         <div class="col-md-8">
             <div class="card shadow m-2 p-2">
                 <div class="row text-center">
+
                     <h3 class="col-lg-6 text-center mt-2"><i class="bi bi-emoji-sunglasses text-primary"></i>
                         {{ plot.title }}</h3>
+
                     <div class="col-lg-6 container">
                         <a class=" btn mt-3 px-3
                                     {% if plot.categories == 'Campsite' %}
@@ -19,10 +21,13 @@
                                     btn-sm" href="">
                             {{ plot.categories }} </a>
                     </div>
+
                 </div>
 <hr>
 
+
                 <!-- Plot image -->
+
 
                 <figure>
                     {% if plot.image %}
@@ -32,6 +37,8 @@
                     {% endif %}
                 </figure>
 
+
+                </figure>
                 <p class="text-truncate"><strong>Description:</strong> {{ plot.description }}</p>
 
                 <p><strong>Campsite:</strong> {{ plot.campsite }}</p>
@@ -39,12 +46,17 @@
                 <p><strong>Country:</strong> {{ plot.country }}</p>
 
                 {% if plot.what3words is not None %}
+                <p><strong>What3Words:</strong> <a href="{{ plot.what3words }}"> Get Directions</a> </p>
                 <p class="p-3">Here is a precise what3words address, made of 3 random words. Every 3 metre square in
                     the world has its own unique what3words address.</p>
-                <p><strong>What3Words:</strong> <a href="{{ plot.what3words }}"> Get Directions</a> </p>
                 {% endif %}
+
+
+                {% if user != plot.owner %}
+
                 <p><strong>Plot Poster:</strong> {{ plot.owner }} </p>
                 <p><strong>Real Name:</strong> {{ plot.owner.profile.realname }} </p>
+
                 <hr>
                 <div class="d-flex justify-content-between mx-3">
                     <div>
@@ -89,8 +101,10 @@
                 </div>
             </div>
             <br>
+
             <h3 class="text-center bg-primary-subtle py-3 border border-primary text-primary rounded">Comments & Replies
             </h3>
+
             {% if user.is_authenticated %}
             <div class="col my-5">
                 <div class="card bg-danger-subtle shadow">
@@ -112,7 +126,7 @@
 
 
             <div class="col my-4" id="tab-contents">
-                <h3 class="text-center bg-primary-subtle py-3">Comments</h3>
+                
                 {% endif %}
                 {% for comment in plot.comments.all %}
 
