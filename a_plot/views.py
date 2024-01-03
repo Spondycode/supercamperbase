@@ -79,7 +79,7 @@ def comment_sent(request, pk):
             comment.parent_plot = plot
             comment.save()
         
-    return redirect("show_plot", plot_id=pk)
+    return render(request, 'includes/comment.html', {'comment': comment} )
 
 
 
