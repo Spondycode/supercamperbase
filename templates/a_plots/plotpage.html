@@ -47,13 +47,13 @@
                     the world has its own unique what3words address.</p>
                 {% endif %}
 
-                
+
                 {% if user != plot.owner %}
-                    
+
                 <p><strong>Plot Poster:</strong> {{ plot.owner }} </p>
                 <p><strong>Real Name:</strong> {{ plot.owner.profile.realname }} </p>
                 {% endif %}
-                    
+
 
                 <div>
                     {% if plot.comments.count %}
@@ -99,6 +99,8 @@
             </div>
             <br>
 
+            <h2 class="text-center bg-primary-subtle py-3">Comments</h2>
+
             {% if user.is_authenticated %}
             <div class="col mt-5">
                 <div class="card bg-danger-subtle shadow">
@@ -119,7 +121,7 @@
 
 
             <div class="col my-4" id="tab-contents">
-                <h3 class="text-center bg-primary-subtle py-3">Comments</h3>
+                
                 {% endif %}
                 {% for comment in plot.comments.all %}
 
@@ -128,7 +130,7 @@
 
                 {% endfor %}
             </div>
-
+        </div>
             <div class="col-md-4">
                 <div class="row row-cols-md">
                     <div class=" m-2 p-2">

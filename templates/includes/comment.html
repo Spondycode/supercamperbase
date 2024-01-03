@@ -4,61 +4,65 @@
     <div class="card-body">
         {% if comment.author%}
 
-        <p class="badge bg-primary-subtle text-dark"><span class="strong ">Comment by:</span>
+        <div class="badge bg-primary-subtle text-dark"><span class="strong ">Comment by:</span>
             {{ comment.author.username}}
-        <p>
-            {% else %}
-        <p>No Author</p>
-        {% endif %}
-        <span class="badge bg-primary-subtle text-dark"><span class="strong ">Date :</span> {{ comment.created }}
-        </span>
+            <div>
+                {% else %}
+                <p>No Author</p>
+                {% endif %}
+                <span class="badge bg-primary-subtle text-dark"><span class="strong ">Date :</span> {{ comment.created
+                    }}
+                </span>
 
-        <p> {{ comment.body }}</p>
+                <p> {{ comment.body }}</p>
 
 
-        <div>
-            <div class="container">
+                <div>
+                    <div class="container">
 
-                <div class="col text-end">
+                        <div class="col text-end">
 
-                    {% include 'snippets/likes_comment.html' %}
-                    <!-- Only allow delete by author -->
-                    {% if user.is_authenticated and comment.author == user %}
-                    <a class="btn bg-primary-subtle btn-sm shadow " href="{% url 'delete_comment' comment.id %}">Delete
-                        Comment</a>
+                            {% include 'snippets/likes_comment.html' %}
+                            <!-- Only allow delete by author -->
+                            {% if user.is_authenticated and comment.author == user %}
+                            <a class="btn bg-primary-subtle btn-sm shadow "
+                                href="{% url 'delete_comment' comment.id %}">Delete
+                                Comment</a>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    {% if comment.replies.count and user.is_authenticated%}
+                    <h5 class="text-center bg-info-subtle py-2">Replies: {{ comment.replies.count }}</h5>
+                    {% else %}
+                    <!-- <span>Add a Reply</span> -->
+
                     {% endif %}
+
+                    <div class="mx-3">
+                        {% for reply in comment.replies.all %}
+                        {% include 'a_plots/reply.html' %}
+                        {% endfor %}
+                    </div>
+
                 </div>
+
+
+                <!-- Add a Reply -->
+                {% if user.is_authenticated %}
+
+                <div class="container card bg-info-subtle">
+                    <form class="mt-2" method="POST" action="{% url 'reply_sent' comment.id %}">
+                        {% csrf_token %}
+                        {{ replyform|crispy }}
+                        <button class="btn btn-info block mb-3 shadow">Submit</button>
+                    </form>
+                </div>
+                {% endif %}
+
             </div>
-
-            <hr>
-
-            {% if comment.replies.count and user.is_authenticated%}
-            <h5 class="text-center bg-info-subtle py-2">Replies: {{ comment.replies.count }}</h5>
-            {% else %}
-            <!-- <span>Add a Reply</span> -->
-
-            {% endif %}
-
-            <div class="mx-3">
-                {% for reply in comment.replies.all %}
-                {% include 'a_plots/reply.html' %}
-                {% endfor %}
-            </div>
-
         </div>
-
-
-        <!-- Add a Reply -->
-        {% if user.is_authenticated %}
-
-        <div class="container card bg-info-subtle">
-            <form class="mt-2" method="POST" action="{% url 'reply_sent' comment.id %}">
-                {% csrf_token %}
-                {{ replyform|crispy }}
-                <button class="btn btn-info block mb-3 shadow">Submit</button>
-            </form>
-        </div>
-        {% endif %}
-
     </div>
 </comment>
