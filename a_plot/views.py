@@ -155,6 +155,27 @@ def add_plot_view(request):
     print(form.errors)
     return render(request, "a_plots/add_plot.html", context)
 
+
+# To edit a plot, we need to get the plot id from the URL, then get the plot from the database, and then edit it.
+@login_required
+def edit_plot_view(request, pk):
+    plot = Plot.objects.get(id=pk)
+    form = PlotAddForm(instance=plot)
+    context = {
+        "form": form,
+        "plot": plot,
+    }
+    if request.method == "POST":
+        form = PlotEditForm(request.POST, instance=plot)
+        if form.is_valid():
+            plot = form.save(commit=False)
+            plot.user = request.user # get the logged in user
+            form.save()
+            messages.success(request, "Plot updated successfully")
+            return redirect("profile")
+    return render(request, "a_plots/edit_plot.html", context)
+
+
 # To delete the plot, we need to get the plot id from the URL, then get the plot from the database, and then delete it.
 @login_required
 def delete_plot_view(request, pk):
@@ -169,23 +190,6 @@ def delete_plot_view(request, pk):
         return redirect("home")
     return render(request, "a_plots/delete_plot.html", context)
 
-
-# To edit a plot, we need to get the plot id from the URL, then get the plot from the database, and then edit it.
-@login_required
-def edit_plot_view(request, pk):
-    plot = Plot.objects.get(id=pk)
-    form = PlotAddForm(instance=plot)
-    context = {
-        "form": form,
-        "plot": plot,
-    }
-    if request.method == "POST":
-        form = PlotEditForm(request.POST, instance=plot)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Plot updated successfully")
-            return redirect("profile")
-    return render(request, "a_plots/edit_plot.html", context)
 
 
 def register_view(request):

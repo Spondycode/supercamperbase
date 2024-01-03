@@ -10,10 +10,19 @@ MODES = (
     ("Van", "Van"),
     ("CamperVan", "CamperVan"),
     ("Motorhome", "Motorhome"),
-    ("Caravan", "Caravan"),
+    ("Small Caravan", "Small Caravan"),
+    ("Large Caravan", "Large Caravan"),
+    ("Trailer Tent", "Trailer Tent"),
     ("Under the Stars", "Under the Stars"),
 )
 
+LEVELS = (
+    ("New SuperCamper", "New SuperCamper"),
+    ("SuperCamper", "SuperCamper"),
+    ("SuperCamper Expert", "SuperCamper Expert"),
+    ("SuperCamper Master", "SuperCamper Master"),
+    ("Restricted SuperCamper", "Restricted SuperCamper"),
+)
 
 
 class Profile(models.Model):
@@ -25,6 +34,7 @@ class Profile(models.Model):
     nationality = models.CharField(max_length=20, null=True, blank=True)
     campermode = models.CharField(max_length=20, choices=MODES, default="Hammock", null=True, blank=True)
     camperstory = models.TextField(null=True, blank=True)
+    level = models.CharField(max_length=30, choices=LEVELS, default="New SuperCamper", null=True, blank=True)
     
     def __str__(self):
         return str(self.user)

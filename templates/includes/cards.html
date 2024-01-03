@@ -35,18 +35,18 @@
                     <p><strong>Price for the night:</strong> {{ plot.price }}</p>
                     <p><strong>Season:</strong> {{ plot.season }}</p>
                     <p><strong>Country: {{ plot.countries }}</strong></p>
-                    
+
                     <!-- Image for the plot -->
                     <figure>
 
-{% if plot.image %}
-    
-<a href="#"><img class="w-100" src="{{ plot.image }}" alt=""></a>
-{% else %}
-<a href="#"><img class="w-100" src="{% static 'images/default.jpg' %}" alt="Default image"></a>
-{% endif %}
-    
-</figure>
+                        {% if plot.image %}
+
+                        <a href="#"><img class="w-100" src="{{ plot.image }}" alt=""></a>
+                        {% else %}
+                        <a href="#"><img class="w-100" src="{% static 'images/default.jpg' %}" alt="Default image"></a>
+                        {% endif %}
+                    </figure>
+
                     <a class="btn btn-info btn-sm col" href="{% url 'show_plot' plot.id %}">
                         View Plot</a>
                     <hr>

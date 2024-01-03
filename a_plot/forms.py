@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 class PlotAddForm(ModelForm):
     class Meta:
         model = Plot
-        fields = ['title', 'description', 'price', 'season', 'image', 'plot', 'what3words', 'campsite', 'countries', 'categories', 'owner']
+        fields = ['title', 'description', 'price', 'season', 'image', 'plot', 'what3words', 'campsite', 'countries', 'categories']
         
 
 

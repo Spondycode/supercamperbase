@@ -1,22 +1,26 @@
-<reply class="d-flex items-end justify-between py-3 border-t">
-    <div class="flex">
+<reply class=" py-3 border-t">
+    <div>
 
         {% if reply.author %}
 
-        <h3 class="badge bg-info-subtle text-dark">Reply....{{ reply.author.username }}</h3>
-        <span class="text-dark">{{ reply.created }}</span>
+        <div class="d-flex flex-row justify-content-between">
+            <p class="badge bg-info-subtle text-dark p-2">Reply by: {{ reply.author.username }}</p>
+            <p class="badge bg-info-subtle text-dark p-2">{{ reply.created }}</p>
+        </div>
         {% else %}
         <span>No Author</span>
         {% endif %}
 
 
         <div>
-            <p class="text-center">{{ reply.body }}</p>
+            <p class=" mb-3">{{ reply.body }}</p>
         </div>
 
         {% if user.is_authenticated and reply.author == user%}
 
-        <a class="btn btn-sm bg-info-subtle" href="{% url 'delete_reply' reply.id %}">Delete Reply</a>
+        <div class="d-flex flex-row-reverse">
+            <a class="btn btn-sm bg-danger-subtle mb-3" href="{% url 'delete_reply' reply.id %}">Delete Reply</a>
+        </div>
         {% endif %}
 
 

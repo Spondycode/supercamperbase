@@ -4,15 +4,17 @@
     <div class="card-body">
         {% if comment.author%}
 
-        <p class="badge bg-primary-subtle text-dark"><span class="strong ">Comment by:</span>
-            {{ comment.author.username}}
-        <p>
-            {% else %}
-        <p>No Author</p>
-        {% endif %}
-        <span class="badge bg-primary-subtle text-dark"><span class="strong ">Date :</span> {{ comment.created }}
-        </span>
-
+        <div class="d-flex flex-row justify-content-between">
+            <p class="badge bg-primary-subtle text-dark"><span class="strong ">Comment by:</span>
+                {{ comment.author.username}}
+            <p>
+                {% else %}
+            <p>No Author</p>
+            {% endif %}
+            <span class="badge bg-primary-subtle text-dark"><span class="strong ">Date :</span> {{ comment.created }}
+            </span>
+        </div>
+        <hr>
         <p> {{ comment.body }}</p>
 
 
@@ -31,13 +33,12 @@
             <hr>
 
             {% if comment.replies.count and user.is_authenticated%}
-            <h5 class="text-center bg-info-subtle py-2">Replies: {{ comment.replies.count }}</h5>
-            {% else %}
-            <!-- <span>Add a Reply</span> -->
+            <h5 class="text-center text-primary bg-info-subtle py-2 border border-info rounded">Replies: {{ comment.replies.count }}
+            </h5>
 
             {% endif %}
 
-            <div class="mx-3">
+            <div class="m-4">
                 {% for reply in comment.replies.all %}
                 {% include 'a_plots/reply.html' %}
                 {% endfor %}
@@ -49,11 +50,11 @@
         {% if user.is_authenticated %}
 
 
-        <div class="container card bg-info-subtle">
+        <div class="container card bg-info-subtle border-info">
             <form class="mt-2" method="POST" action="{% url 'reply_sent' comment.id %}">
                 {% csrf_token %}
                 {{ replyform|crispy }}
-                <button class="btn btn-info block mb-3 shadow">Submit</button>
+                <button class="btn btn-info block mb-3 border-primary shadow">Submit</button>
             </form>
         </div>
         {% endif %}

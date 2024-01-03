@@ -6,13 +6,10 @@
         <div class="col-md-8">
             <div class="card shadow m-2 p-2">
                 <div class="row text-center">
-                    <!-- <h3 class="col-sm-8"><i class="bi bi-emoji-sunglasses text-primary"></i> {{ plot.title }}</h3>
-                    <a class="col-sm-2 btn btn-secondary btn-sm" href="">
-                        {{ plot.categories }} </a> -->
-
-                        <h3 class="col-lg-6 text-center mt-2"><i class="bi bi-emoji-sunglasses text-primary"></i> {{ plot.title }}</h3>
-                        <div class="col-lg-6 container">
-                            <a class=" btn mt-3 px-3
+                    <h3 class="col-lg-6 text-center mt-2"><i class="bi bi-emoji-sunglasses text-primary"></i>
+                        {{ plot.title }}</h3>
+                    <div class="col-lg-6 container">
+                        <a class=" btn mt-3 px-3
                                     {% if plot.categories == 'Campsite' %}
                                     btn-primary {% endif %}
                                     {% if plot.categories == 'Wild' %}
@@ -20,13 +17,20 @@
                                     {% if plot.categories == 'Official' %}
                                     btn-primary {% endif %}
                                     btn-sm" href="">
-                                {{ plot.categories }} </a>
-                        </div>
-
-
-
+                            {{ plot.categories }} </a>
+                    </div>
                 </div>
-                <hr>
+<hr>
+
+                <!-- Plot image -->
+
+                <figure>
+                    {% if plot.image %}
+                    <a href="#"><img class="w-100 mb-2" src="{{ plot.image }}" alt="Plot Image"></a>
+                    {% else %}
+                    <a href="#"><img class="w-100 mb-2" src="{% static 'images/default.jpg' %}" alt="Default image"></a>
+                    {% endif %}
+                </figure>
 
                 <p class="text-truncate"><strong>Description:</strong> {{ plot.description }}</p>
 
@@ -41,35 +45,38 @@
                 {% endif %}
                 <p><strong>Plot Poster:</strong> {{ plot.owner }} </p>
                 <p><strong>Real Name:</strong> {{ plot.owner.profile.realname }} </p>
-
-                <div>
-                    {% if plot.comments.count %}
-                    <h5 class="mt-2"> <i class="bi bi-megaphone-fill text-color-primary "></i> Comments: <span class="">{{ plot.comments.count }}</span></h5>
-                    {% else %}
-                    <p class="mt-2">Add a Comment below..</p> 
-                    {% endif %}
+                <hr>
+                <div class="d-flex justify-content-between mx-3">
+                    <div>
+                        {% if plot.comments.count %}
+                        <h5 class="mt-2 text-primary">
+                            <i class="bi bi-megaphone-fill text-primary "></i>
+                            Comments: <span class="">{{ plot.comments.count }}</span>
+                        </h5>
+                        {% else %}
+                        <p class="mt-2">Add a Comment below..</p>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <h5 class="mt-2 text-danger">
+                            <i class="bi bi-balloon-heart-fill"></i> Likes: {{ plot.likes.count }}
+                        </h5>
+                    </div>
                 </div>
-
-<!-- All about Likes -->
-                <h5>
-                    
-                    <i class="bi bi-balloon-heart-fill"></i> Likes: {{ plot.likes.count }} </h5>
                 <p>
-                     {% if user.is_authenticated and user != plot.author %}
-                    <a class="btn btn-sm btn-secondary" href="{% url 'like_plot' plot.id %}">Add a Like</a>
+                    {% if user.is_authenticated and user != plot.author %}
+                <div class="d-flex flex-row-reverse mx-4"><a class="btn btn-sm btn-secondary"
+                        href="{% url 'like_plot' plot.id %}">Add a Like</a></div>
                 </p>
-                    
+
                 {% endif %}
-                
-<!-- Plot image -->
-                <figure>
-                    <a href="#"><img class="w-100" src="{{ plot.image }}" alt=""></a>
-                </figure>
 
 
-                
 
-                <div class="d-flex gap-2">
+
+
+
+                <div class="d-flex gap-4">
 
                     {% if user.is_authenticated and user == plot.owner %}
 
@@ -82,7 +89,8 @@
                 </div>
             </div>
             <br>
-            <h3 class="text-center bg-primary-subtle py-3 border border-black rounded">Comments</h3>
+            <h3 class="text-center bg-primary-subtle py-3 border border-primary text-primary rounded">Comments & Replies
+            </h3>
             {% if user.is_authenticated %}
             <div class="col my-5">
                 <div class="card bg-danger-subtle shadow">
@@ -90,18 +98,19 @@
                         <form method="POST" , action="{% url 'comment_sent' plot.id %}">
                             {% csrf_token %}
                             {{ commentform|crispy }}
-                            <button class="btn bg-primary-subtle shadow mb-2" type="submit">Add Comment</button>
+                            <button class="btn bg-primary-subtle shadow mb-2 border border-primary" type="submit">Add
+                                Comment</button>
                         </form>
                     </div>
                 </div>
 
             </div>
-            
+
 
             {% else %}
             <h3 class="text-center"><a href="{% url 'login' %}">Login</a> If You Want to Make a Comment</h3>
-            
-            
+
+
             <div class="col my-4" id="tab-contents">
                 <h3 class="text-center bg-primary-subtle py-3">Comments</h3>
                 {% endif %}
@@ -112,17 +121,17 @@
 
                 {% endfor %}
             </div>
-            
+
             <div class="col-md-4">
                 <div class="row row-cols-md">
                     <div class=" m-2 p-2">
                         {% include 'includes/aside1.html' %}
-                        
+
                         {% include 'includes/aside2.html' %}
                     </div>
                 </div>
             </div>
-            
+
         </div>
 
 
