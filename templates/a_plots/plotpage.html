@@ -82,15 +82,15 @@
                 </div>
             </div>
             <br>
-
+            <h3 class="text-center bg-primary-subtle py-3 border border-black rounded">Comments</h3>
             {% if user.is_authenticated %}
-            <div class="col mt-5">
+            <div class="col my-5">
                 <div class="card bg-danger-subtle shadow">
                     <div class="container mt-2">
                         <form method="POST" , action="{% url 'comment_sent' plot.id %}">
                             {% csrf_token %}
                             {{ commentform|crispy }}
-                            <button class="btn btn-primary mb-2" type="submit">Add Comment</button>
+                            <button class="btn bg-primary-subtle shadow mb-2" type="submit">Add Comment</button>
                         </form>
                     </div>
                 </div>
