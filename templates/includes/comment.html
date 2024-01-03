@@ -1,20 +1,22 @@
 {% load static %}
 {% load crispy_forms_tags %}
 <comment class="card shadow mt-2">
-    <div class="card-body">
-        {% if comment.author%}
+<div class="card-header">
+    {% if comment.author%}
+    <div class="d-flex flex-row justify-content-between">
+        <p class=" text-dark mt-1">Comment by:
+            {{ comment.author.username}}
+        <p>
+            {% else %}
+        <p>No Author</p>
+        {% endif %}
+        <p class=" text-dark mt-1">Date : {{ comment.created }}</p>
+        
+    </div>
+</div>
 
-        <div class="d-flex flex-row justify-content-between">
-            <p class="badge bg-primary-subtle text-dark"><span class="strong ">Comment by:</span>
-                {{ comment.author.username}}
-            <p>
-                {% else %}
-            <p>No Author</p>
-            {% endif %}
-            <span class="badge bg-primary-subtle text-dark"><span class="strong ">Date :</span> {{ comment.created }}
-            </span>
-        </div>
-        <hr>
+    <div class="card-body">
+        
         <h6> {{ comment.body }}</h6>
 
         <div>
