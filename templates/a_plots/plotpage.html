@@ -6,9 +6,25 @@
         <div class="col-md-8">
             <div class="card shadow m-2 p-2">
                 <div class="row text-center">
-                    <h3 class="col-sm-8"><i class="bi bi-emoji-sunglasses text-primary"></i> {{ plot.title }}</h3>
+                    <!-- <h3 class="col-sm-8"><i class="bi bi-emoji-sunglasses text-primary"></i> {{ plot.title }}</h3>
                     <a class="col-sm-2 btn btn-secondary btn-sm" href="">
-                        {{ plot.categories }} </a>
+                        {{ plot.categories }} </a> -->
+
+                        <h3 class="col-lg-6 text-center mt-2"><i class="bi bi-emoji-sunglasses text-primary"></i> {{ plot.title }}</h3>
+                        <div class="col-lg-6 container">
+                            <a class=" btn mt-3 px-3
+                                    {% if plot.categories == 'Campsite' %}
+                                    btn-primary {% endif %}
+                                    {% if plot.categories == 'Wild' %}
+                                    btn-success {% endif %}
+                                    {% if plot.categories == 'Official' %}
+                                    btn-primary {% endif %}
+                                    btn-sm" href="">
+                                {{ plot.categories }} </a>
+                        </div>
+
+
+
                 </div>
                 <hr>
 
@@ -28,27 +44,30 @@
 
                 <div>
                     {% if plot.comments.count %}
-                    <p class="mt-2"> Comments: <span class="">{{ plot.comments.count }}</span></p>
+                    <h5 class="mt-2"> <i class="bi bi-megaphone-fill text-color-primary "></i> Comments: <span class="">{{ plot.comments.count }}</span></h5>
                     {% else %}
-                    <p class="mt-2">Add a Comment below..</p>
+                    <p class="mt-2">Add a Comment below..</p> 
                     {% endif %}
                 </div>
 
-
-                
+<!-- All about Likes -->
+                <h5>
+                    
+                    <i class="bi bi-balloon-heart-fill"></i> Likes: {{ plot.likes.count }} </h5>
                 <p>
-                    Likes: {{ plot.likes.count }} {% if user.is_authenticated and user != plot.author %}
-                    <a class="btn btn-sm btn-dark" href="{% url 'like_plot' plot.id %}">Add a Like</a>
+                     {% if user.is_authenticated and user != plot.author %}
+                    <a class="btn btn-sm btn-secondary" href="{% url 'like_plot' plot.id %}">Add a Like</a>
                 </p>
                     
                 {% endif %}
                 
-                
+<!-- Plot image -->
                 <figure>
                     <a href="#"><img class="w-100" src="{{ plot.image }}" alt=""></a>
                 </figure>
 
 
+                
 
                 <div class="d-flex gap-2">
 

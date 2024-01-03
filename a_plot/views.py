@@ -136,7 +136,7 @@ def delete_reply(request, pk):
 def add_plot_view(request):
     submitted = False
     if request.method == "POST":
-        form = PlotAddForm(request.POST)
+        form = PlotAddForm(request.POST, request.FILES)
         if form.is_valid():
             plot = form.save(commit=False)
             plot.user = request.user # get the logged in user
@@ -282,8 +282,12 @@ def search_countries_view(request):
 
 def like_plot(request, pk):
     plot = get_object_or_404(Plot, id=pk)
-    
+    user_exists = plot.likes.filter(username=request.user.username).exists()
+   
     if plot.owner != request.user:
-        plot.likes.add(request.user)
+        if user_exists:
+            plot.likes.remove(request.user)
+        else:
+            plot.likes.add(request.user)
         
     return redirect("show_plot", plot_id=pk)

@@ -11,8 +11,11 @@
                     {% for plot in plots %}
                     <div class="col-md-6">
                         <div class=" card shadow m-2 p-2">
-                            <h3 class="text-center"><i class="bi bi-emoji-sunglasses text-primary"></i>
-                                {{ plot.title }}</h3>
+                            <div class="row">
+                                <h3 class=" text-center"><i class="bi bi-emoji-sunglasses text-primary"></i>
+                                    {{ plot.title }}</h3>
+                                    
+                            </div>
 
                             {% if plot.owner %}
                             <h3 class="btn btn-block btn-outline-info my-2 text-dark ">
@@ -32,9 +35,20 @@
                                 View Plot</a>
                             <hr>
                             <div>
-                                <a class="btn btn-secondary btn-sm" href="">
-                                    {{ plot.categories }}</a>
+                                <!-- <a class="btn btn-secondary btn-sm" href="">
+                                    {{ plot.categories }}</a> -->
                                 <!-- add a link to the category_view -->
+                                <div class=" container">
+                                    <a class=" btn mt-2 px-3
+                                            {% if plot.categories == 'Campsite' %}
+                                            btn-primary {% endif %}
+                                            {% if plot.categories == 'Wild' %}
+                                            btn-success {% endif %}
+                                            {% if plot.categories == 'Official' %}
+                                            btn-primary {% endif %}
+                                            btn-sm" href="">
+                                        {{ plot.categories }} </a>
+                                </div>
                             </div>
                         </div>
                     </div>
