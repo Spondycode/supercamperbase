@@ -1,6 +1,6 @@
 <div class="mb-2">
-    <h5>
-        <i class="bi bi-balloon-heart-fill"></i> Likes: <span id="like-{{comment.id}}">
+    <h5 class="text-danger">
+        <i class=" bi bi-balloon-heart-fill"></i> Likes: <span id="like-{{comment.id}}">
             {{ comment.likes.count}}</span>
     </h5>
     {% if user.is_authenticated and user != comment.author %}

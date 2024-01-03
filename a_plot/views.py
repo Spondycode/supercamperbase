@@ -295,7 +295,7 @@ def like_plot(request, pk):
         else:
             plot.likes.add(request.user)
         
-    return HttpResponse(plot.likes.count() )
+    return render(request, "a_plots/plotpage.html", {"plot": plot})
 
 
 def like_comment(request, pk):
