@@ -183,3 +183,22 @@ class Reply(models.Model):
         
     class Meta:
         ordering = ["-created"]
+        
+REPORT_REASONS = (
+    ("Off Topic", "Off Topic"),
+    ("Spam", "Spam"),
+    ("Sexual content", "Sexual content"),
+    ("Breaks Rules", "Breaks Rules"),
+    ("Other", "Other"),
+)    
+        
+class ReportPlot(models.Model):
+    plot = models.ForeignKey(Plot, on_delete=models.CASCADE)
+    user = models.ForeignKey("auth.User", on_delete=models.CASCADE)
+    reason = models.CharField(max_length=100, choices=REPORT_REASONS, default="Off Topic")
+    report_count = models.IntegerField(default=1)
+    created = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=100, default="pending")
+    
+    def __str__(self):
+        return f'{self.user.username} : {self.plot.title}'
