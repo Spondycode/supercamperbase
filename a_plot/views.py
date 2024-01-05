@@ -51,6 +51,15 @@ def about_view(request):
 
 
 
+def questions_view(request):
+    title = "Frequently Asked Questions"
+    context = {
+        "title": title,
+    }
+    return render(request, "a_plots/questions.html", context)
+
+
+
 
 
 def plot_view(request, plot_id):
@@ -352,3 +361,5 @@ def like_comment(request, pk):
             comment.likes.add(request.user)
         
     return HttpResponse(comment.likes.count() )
+
+

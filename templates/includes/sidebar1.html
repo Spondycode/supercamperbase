@@ -1,17 +1,22 @@
-<div class=" row row-cols-md">
-    <h3 class="text-center">Super Campista !</h3>
-    <div class=" m-4">
-        <div class="col ">
+<div class="container">
 
-            {% include 'includes/search.html' %}
+    <div class="bg-info m-3 p-3 rounded-4">
+        <h3 class="text-center text-white mb-4">Super Campista !</h3>
+        <h4 class="text-center pb-4">Super Camper is a community of campers who share their camping plot information with other campers.
+        </h4>
+    </div>
+    <div class=" my-4">
+        <div class="d-flex flex-column">
 
-            {% include 'includes/categories.html' %}
+            <div class="p-2">{% include 'includes/search.html' %}</div>
 
-            {% include 'includes/aside1.html' %}
+            <div class="p-2">{% include 'includes/categories.html' %} </div>
 
-            {% include 'includes/plotoftheweek.html' %}
+            <div class="p-2">{% include 'includes/aside1.html' %} </div>
 
-            {% include 'includes/aside2.html' %}
+            <div class="p-2">{% include 'includes/plotoftheweek.html' %}</div>
+
+            <div class="p-2">{% include 'includes/aside2.html' %}</div>
         </div>
     </div>
 </div>

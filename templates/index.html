@@ -3,27 +3,23 @@
 {% block content %}
 
 <body>
-    <div class="container-fluid ">
 
-        <div class="row">
+    <div class="row">
+
+        <div class="col-xl-9">
             {% include 'includes/cards.html' %}
 
-            <div class=" col-lg-3 ">
-                {% include 'includes/sidebar1.html' %}
-            </div>
         </div>
+
+        <div class=" col-xl-3 ">
+            {% include 'includes/sidebar1.html' %}
+        </div>
+
     </div>
 
-    <br>
-    <br>
 
     {% include 'includes/showcase.html' %}
-
-    {% include 'includes/questions.html' %}
-
 
     {% endblock content %}
 
 </body>
-
-</html>

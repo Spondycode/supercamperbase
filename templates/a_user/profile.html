@@ -54,18 +54,15 @@
 
       <div class=" col-lg-3 ">
         <div class=" row row-cols-md">
-          <div class=" ">
             <div class="col ">
 
-              {% include 'includes/categories.html' %}
-
-              {% include 'includes/aside1.html' %}
-
-              {% include 'includes/aside2.html' %}
-
+              {% include 'includes/sidebar1.html' %}
+<br>
+<br>
+<br>
+<br>
               {% include 'includes/user_info.html' %}
             </div>
-          </div>
         </div>
       </div>
     </div>
@@ -74,11 +71,9 @@
   <br>
   <br>
 
-  {% include 'includes/questions.html' %}
-
-
+  <div>{% include 'includes/showcase.html' %}</div>
+  
+<br>
+<br>
+  {% endblock %}
 </body>
-
-
-<div>{% include 'includes/showcase.html' %}</div>
-{% endblock %}
