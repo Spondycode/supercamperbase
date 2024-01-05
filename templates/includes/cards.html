@@ -9,25 +9,25 @@
 
 
                     <h3 class="text-center"><i class="bi bi-emoji-sunglasses text-primary"></i> {{ plot.title }}</h3>
-                    <a class=" btn 
-                            {% if plot.categories == 'Campsite' %}
-                            btn-primary {% endif %}
-                            {% if plot.categories == 'Wild' %}
-                            btn-success {% endif %}
-                            {% if plot.categories == 'Official' %}
-                            btn-primary {% endif %}
-                            btn-sm" href="">
-                        {{ plot.categories }} </a>
+                    {% if plot.categories == 'Campsite' %}
+                    <a class="btn mt-3 px-3 btn-primary" href="{% url 'campsite-plots' %}">Campsite</a>
+                    {% endif %}
+
+                    {% if plot.categories == 'Official' %}
+                    <a class="btn mt-3 px-3 btn-secondary" href="{% url 'official-plots' %}">Official</a>
+                    {% endif %}
+
+                    {% if plot.categories == 'Wild' %}
+                    <a class="btn mt-3 px-3 btn-primary" href="{% url 'wild-plots' %}">Wild</a>
+                    {% endif %}
 
 
                     {% if plot.owner %}
-                    <h3 class="btn btn-block btn-outline-info my-2 text-dark ">
-                        Super Camper: {{ plot.owner.profile.realname }} - User Name - {{ plot.owner }}</h3>
+                    <p class="btn btn-block btn-outline-info my-2 text-dark ">
+                        User Name - {{ plot.owner }}</p>
                     {% else %}
                     <h3 class="btn btn-block btn-outline-info my-2 text-dark ">
                         No owner</h3>
-                    <a class="btn btn-secondary btn-sm text-center" href="">
-                        {{ plot.categories }}
                     </a>
                     {% endif %}
                     <p class="text-truncate"><strong>Description:</strong> {{ plot.description }}</p>
@@ -41,15 +41,16 @@
 
                         {% if plot.image %}
 
-                        <a href="#"><img class="w-100" src="{{ plot.image }}" alt=""></a>
+                        <a href="{% url 'show_plot' plot.id %}"><img class="w-100" src="{{ plot.image }}" alt=""></a>
                         {% else %}
-                        <a href="#"><img class="w-100" src="{% static 'images/default.jpg' %}" alt="Default image"></a>
+                        <a href="{% url 'show_plot' plot.id %}"><img class="w-100" src="{% static 'images/default.jpg' %}" alt="Default image"></a>
                         {% endif %}
                     </figure>
 
                     <a class="btn btn-info btn-sm col" href="{% url 'show_plot' plot.id %}">
                         View Plot</a>
                     <hr>
+                    <a href="">Report</a>
 
                     {% if plot.comments.count %}
 

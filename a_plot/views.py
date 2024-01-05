@@ -263,6 +263,49 @@ def search_categories_view(request):
     return render(request, "a_plots/category_search.html", context)
 
 
+def campsite_plots_view(request):
+    if request.user.is_authenticated:
+        plots = Plot.objects.filter(categories__icontains="Campsite")  # Fetch plots with category "Campsite"
+        context = {
+            "plots": plots,
+        }
+        return render(request, "a_plots/campsite_plots.html", context)
+        
+    else:
+        messages.success(request, "You need to login first")
+        return redirect("/login")
+
+
+
+def official_plots_view(request):
+    if request.user.is_authenticated:
+        plots = Plot.objects.filter(categories__icontains="Official")  # Fetch plots with category "Official"
+        context = {
+            "plots": plots,
+        }
+        return render(request, "a_plots/official_plots.html", context)
+        
+    else:
+        messages.success(request, "You need to login first")
+        return redirect("/login")
+
+
+
+def wild_plots_view(request):
+    if request.user.is_authenticated:
+        plots = Plot.objects.filter(categories__icontains="Wild")  # Fetch plots with category "Wild"
+        context = {
+            "plots": plots,
+        }
+        return render(request, "a_plots/wild_plots.html", context)
+        
+    else:
+        messages.success(request, "You need to login first")
+        return redirect("/login")
+
+
+
+
 
 
 # search plots by country

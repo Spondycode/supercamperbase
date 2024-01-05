@@ -3,26 +3,20 @@
     <p>Is the plot in a campsite or one of those official camping spots you find in or near a town. Or is it totally
         wild and you found it and loved it because it was a special place?</p>
    
-    <h5 class="mt-2">Search based on Category</h5>
+    <h5 class="mt-2 text-center">Search based on Category</h5>
 
-    <div class="container m-1">
-        <form class="d-flex" method="POST" action="{% url 'search_categories' %}" type="search" placeholder="Search">
-            {% csrf_token %}
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-    </div>
+
 
 
 
 
     <div class="text-center">
-        <span class="badge rounded-pill bg-secondary m-1">
-            Campsite </span>
-        <span class="badge rounded-pill bg-dark m-1">
-            Official Plot</span>
-        <span class="badge rounded-pill bg-secondary m-1">
-            Wild</span>
+        <a href="{% url 'campsite-plots' %}" class="btn btn-primary m-1">
+            Campsite </a>
+        <a href="{% url 'official-plots' %}" class="btn btn-secondary m-1">
+            Official Plot</a>
+        <a href="{% url 'wild-plots' %}" class="btn btn-success m-1">
+            Wild</a>
     </div>
 
 

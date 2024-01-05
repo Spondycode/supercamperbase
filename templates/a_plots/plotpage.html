@@ -11,15 +11,23 @@
                         {{ plot.title }}</h3>
 
                     <div class="col-lg-6 container">
-                        <a class=" btn mt-3 px-3
-                                    {% if plot.categories == 'Campsite' %}
-                                    btn-primary {% endif %}
-                                    {% if plot.categories == 'Wild' %}
-                                    btn-success {% endif %}
-                                    {% if plot.categories == 'Official' %}
-                                    btn-primary {% endif %}
-                                    btn-sm" href="">
-                            {{ plot.categories }} </a>
+  
+
+                        {% if plot.categories == 'Campsite' %}
+                        <a class="btn mt-3 px-3 btn-primary" href="{% url 'campsite-plots' %}">Campsite</a>
+                        {% endif %}
+
+                        {% if plot.categories == 'Official' %}
+                        <a class="btn mt-3 px-3 btn-secondary" href="{% url 'official-plots' %}">Official</a>
+                        {% endif %}
+
+                        {% if plot.categories == 'Wild' %}
+                        <a class="btn mt-3 px-3 btn-primary" href="{% url 'wild-plots' %}">Wild</a>
+                        {% endif %}
+
+
+
+
                     </div>
 
                 </div>
@@ -79,7 +87,7 @@
                 <div class="d-flex flex-row-reverse mx-4"><a class="btn btn-sm btn-secondary"
                         href="{% url 'like_plot' plot.id %}">Add a Like</a></div>
                 </p>
-                    {% endif %}
+                {% endif %}
 
                 {% endif %}
 
@@ -102,8 +110,8 @@
                 <h3 class="card-header text-center bg-info pb-5 pt-3 border  text-white ">Comments & Replies
                 </h3>
                 <div class=" card-body bg-info-subtle">
-                   
-                    
+
+
                     {% if user.is_authenticated %}
                     <div class="col mb-5">
                         <div class="card bg-warning-subtle shadow">
@@ -112,7 +120,7 @@
                                     {% csrf_token %}
                                     {{ commentform|crispy }}
                                     <button class="btn bg-primary-subtle shadow mb-2 border border-primary"
-                                    type="submit">Add Comment</button>
+                                        type="submit">Add Comment</button>
                                 </form>
                             </div>
                         </div>
@@ -132,7 +140,7 @@
 
 
 
-            
+
             <div class="col-md-4">
                 <div class="row row-cols-md">
                     <div class=" m-2 p-2">

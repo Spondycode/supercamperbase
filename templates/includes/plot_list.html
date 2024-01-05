@@ -1,9 +1,4 @@
-{% extends "base.html" %}
 {% load static %}
-{% block content %}
-
-{% if search %}
-<h1 class="text-center">You Searched for {{ search }}</h1>
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-8 ">
@@ -52,37 +47,6 @@
                     </div>
                     {% endfor %}
                 </div>
-                {% else %}
-                <div class="container text-center">
-                    <h1 class="">Try Again....</h1>
-                    <h2><em>No plots found</em></h2>
-                </div>
-                {% endif %}
+
             </div>
         </div>
-
-        <div class=" col-lg-3 ">
-            <div class=" row row-cols-md">
-                <h3 class="text-center">Super Campista !</h3>
-                <div class=" m-4">
-                    <div class="col ">
-
-                        {% include 'includes/search.html' %}
-
-                        {% include 'includes/categories.html' %}
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-
-
-
-<br>
-
-
-
-{% endblock content %}
