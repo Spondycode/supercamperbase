@@ -77,17 +77,24 @@
                         {% endif %}
                     </div>
                     <div>
-                        <h5 class="mt-2 text-danger">
-                            <i class="bi bi-balloon-heart-fill"></i> Likes: {{ plot.likes.count }}
+                        <h5 >
+                            
+                            {% if user in plot.likes.all %}
+                            <i class="bi bi-balloon-heart-fill mt-2 text-danger"></i> Liked: {{ plot.likes.count }}
+                            {% else %}
+                            <i class="bi bi-balloon-heart mt-2 "></i> Like: {{ plot.likes.count }}    
+                            {% endif %}
+                                
                         </h5>
                     </div>
                 </div>
                 <p>
                     {% if user.is_authenticated and user != plot.author %}
                 <div class="d-flex flex-row-reverse mx-4"><a class="btn btn-sm btn-secondary"
-                        href="{% url 'like_plot' plot.id %}">Add a Like</a></div>
+                        href="{% url 'like_plot' plot.id %}">Like</a>
+                </div>
                 </p>
-                {% endif %}
+                    {% endif %}
 
                 {% endif %}
 
