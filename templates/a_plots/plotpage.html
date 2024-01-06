@@ -90,9 +90,17 @@
                 </div>
                 <p>
                     {% if user.is_authenticated and user != plot.author %}
-                <div class="d-flex flex-row-reverse mx-4"><a class="btn btn-sm btn-secondary"
-                        href="{% url 'like_plot' plot.id %}">Like</a>
-                </div>
+                    
+                        {% if user in plot.like.all %}
+                        <div class="d-flex flex-row-reverse mx-4"><a class="btn btn-sm btn-secondary"
+                                href="{% url 'like_plot' plot.id %}">Remove Like</a>
+                        {% else %}
+                            
+                        <div class="d-flex flex-row-reverse mx-4"><a class="btn btn-sm btn-secondary"
+                                href="{% url 'like_plot' plot.id %}">Like</a>
+                        </div>
+                        {% endif %}
+                        
                 </p>
                     {% endif %}
 

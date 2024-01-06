@@ -2,24 +2,16 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
-from .models import *
-from django.forms import ModelForm
-from django import forms # for add_plot_view
-from .forms import *
+from .models import Plot, Comment, Reply    
+# from django.forms import ModelForm
+# from django import forms # for add_plot_view
+from .forms import PlotAddForm, PlotEditForm, RegisterForm, CommentCreateForm, ReplyCreateForm
 from django.contrib import messages 
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 
-# def home_view(request, tag=None):
-#     if tag:
-#         plots = Plot.objects.filter(tags__slug=tag)
-#     else:
-#         plots = Plot.objects.all()
-#     context = {
-#         "plots": plots,
-#     }
-#     return render(request, "index.html", context)
+
 
 # HOME PAGE
 def home_view(request):
