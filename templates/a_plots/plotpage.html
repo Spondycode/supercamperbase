@@ -91,9 +91,10 @@
                 <p>
                     {% if user.is_authenticated and user != plot.author %}
                     
-                        {% if user in plot.like.all %}
+                        {% if user in plot.likes.all %}
                         <div class="d-flex flex-row-reverse mx-4"><a class="btn btn-sm btn-secondary"
                                 href="{% url 'like_plot' plot.id %}">Remove Like</a>
+                        </div>
                         {% else %}
                             
                         <div class="d-flex flex-row-reverse mx-4"><a class="btn btn-sm btn-secondary"
