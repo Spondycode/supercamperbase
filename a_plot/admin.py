@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import *
+from .models import Plot, Comment, Reply, LikedPlot, LikedComment, ReportPlot
 
 admin.site.register(Plot)
 admin.site.register(Comment)
