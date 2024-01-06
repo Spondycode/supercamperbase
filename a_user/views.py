@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 from django.contrib import messages
-from a_plot.views import *
-from .forms import *
+from a_plot.views import Plot
+from .forms import ProfileAddForm
 from django.contrib.auth.decorators import login_required   
 
 
@@ -29,6 +29,7 @@ def profile_view(request):
     
 
 # Edit the profile of the logged in user
+@login_required()
 def profile_edit_view(request):
     if request.user.is_authenticated:
         profile = request.user.profile
@@ -73,6 +74,7 @@ def profile_create_view(request):  # Create a new profile
     
     
 # Delete a Profile
+
 def profile_delete_view(request):
     user = request.user
     

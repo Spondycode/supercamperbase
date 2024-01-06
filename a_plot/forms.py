@@ -1,5 +1,5 @@
 from django import forms    
-from .models import * 
+from .models import Plot, Comment, Reply
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User 
@@ -22,8 +22,6 @@ class PlotEditForm(ModelForm):
         
 class RegisterForm(UserCreationForm):
     email = forms.EmailField(required=True)
-    # nationality = forms.CharField(max_length=100, required=True)
-    # test = forms.CharField(max_length=100, required=True)
     
     class Meta:
         model = User 

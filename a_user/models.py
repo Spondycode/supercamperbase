@@ -17,6 +17,8 @@ MODES = (
 )
 
 LEVELS = (
+    ("SuperCamper Founder1", "SuperCamper Founder1"),
+    ("SuperCamper Founder2", "SuperCamper Founder2"),
     ("New SuperCamper", "New SuperCamper"),
     ("SuperCamper", "SuperCamper"),
     ("SuperCamper Expert", "SuperCamper Expert"),
@@ -34,6 +36,7 @@ class Profile(models.Model):
     nationality = models.CharField(max_length=20, null=True, blank=True)
     campermode = models.CharField(max_length=20, choices=MODES, default="Hammock", null=True, blank=True)
     camperstory = models.TextField(null=True, blank=True)
+    fav_campsite = models.CharField(max_length=20, null=True, blank=True)
     level = models.CharField(max_length=30, choices=LEVELS, default="New SuperCamper", null=True, blank=True)
     plot_reports = models.IntegerField(default=0, null=True, blank=True)
     

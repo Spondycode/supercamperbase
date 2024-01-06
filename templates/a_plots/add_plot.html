@@ -2,14 +2,13 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
-<p class="d-md-none text-center">Scroll down for help with filling the form</p>
-<div class="container-fluid mt-3">
+<p class="d-lg-none bg-info-subtle py-4 text-center">Scroll down for help with filling the form</p>
+<div class="container mt-3">
 
     <div class="row">
-        <div class="col-lg-9 ">
-            <div class="container col-md-10">
+        <div class="col-lg-8 ">
                 <div class="row row-cols-md">
-                    <div class="card shadow  px-md-5">
+                    <div class="card shadow  px-md-5 ml-3 mb-4">
                         <h3 class="text-center">Add Your Plot</h3>
 
                         {% if submitted %}
@@ -30,30 +29,37 @@
                         {% endif %}
                     </div>
 
-                    <!-- Add logic so only the user who created the plot can edit it -->
                 </div>
-            </div>
         </div>
-        <div class="col-lg-2">
-            <div class="row row-cols-md">
-                <div class=" m-2 p-2">
-                    <h5 class="text-center">How to Fill in the Form</h5>
+        <div class="col-lg-1">
+<!-- This is just a spacer -->
+        </div>
+
+        <div class="col-lg-3">
+            <div class="row">
+                    <h4 class="bg-info p-4 text-center">How to Fill in the Form</h4>
                     <p><strong>Title: </strong>Whatever you want to call the plot</p>
                     <p><strong>Description: </strong>Add the details of what it is you like about the plot. Such as if
-                        it 
-                        is sunny or with shade</p>
+                        it is sunny or with shade. Is it close to the facilities, like the showers, electric hookup and water?</p>
                     <p><strong>Price: </strong>How much does it cost per night</p>
                     <p><strong>Image: </strong>Add a photo to upload</p>
-                    <p><strong>Plot Number: </strong>Add a photo to upload</p>
-                    <p><strong>What3Words: </strong><a target="_blank" href="https://what3words.com/">What3Words</a> is an excellent system to mark a spot easily. The whole
+                    <p><strong>Plot Number: </strong>The reference number used by the campsite</p>
+                    <p><strong>What3Words: </strong><a target="_blank" href="https://what3words.com/">What3Words</a> 
+                        is an excellent system to mark a spot easily. The whole
                         of the earth is divided into 3m squares. You could be in the middle of a desert or in forest,
                         well away from any civilisation. Still you can send an address using just 3 words.</p>
                     <p>Add the complete url including https://</p>
+<h4 class="bg-danger text-white text-center p-2">IMPORTANT</h4>
+<p>Especially for the non campsite spots. If you don't add the What3Words address, no one else will be able to find it and you might not find it again either.</p>
+
                     <div class="text-center mb-3"><a class="btn btn-primary btn-sm"
                             href="https://what3words.com/products/what3words-app">Get the App
                         </a></div>
                     <p><strong>Campsite: </strong>What is the name of the campsite</p>
-                </div>
+                    <p><strong>Categories: </strong>What sort of camping? Three categories to choose from. Wild and that's where ever and without any 
+                    organisation. The other options are Camping site and Official site but not a camp site. Here in Spain many towns set up a place for 
+                passing campervans, RV, and Motorhomes. Be aware some countries don't allow wild camping if you want to put up a tent. Usually due to wild fire concerns, 
+                which seems reasonable here in dry Spain. </p>
             </div>
         </div>
     </div>
