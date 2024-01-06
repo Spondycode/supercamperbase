@@ -1,3 +1,12 @@
 {
-  "cSpell.words": ["Boostrap", "commentform", "replyform"]
+  "cSpell.words": [
+    "Boostrap",
+    "commentform",
+    "commentsent",
+    "likedcomments",
+    "likedplots",
+    "Marino",
+    "replyform",
+    "replysent"
+  ]
 }
