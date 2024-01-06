@@ -11,7 +11,6 @@ urlpatterns = [
     path("plot/like/<pk>/", like_plot, name="like_plot"),
     path("comment/like/<pk>/", like_comment, name="like_comment"),
     path("search_plots/", search_plots_view, name="search_plots"),
-    path("search_categories/", search_categories_view, name="search_categories"),
     path("campsite_plots/", campsite_plots_view, name="campsite-plots"),
     path("wild_plots/", wild_plots_view, name="wild-plots"),
     path("official_plots/", official_plots_view, name="official-plots"),

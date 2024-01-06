@@ -1,15 +1,16 @@
 <reply class=" py-3 border-t">
-    <div>
+    <div class="card mt-3">
 
-        {% if reply.author %}
-
-        <div class="d-flex flex-row justify-content-between">
-            <p class="badge bg-info-subtle text-dark p-2">Reply by: {{ reply.author.username }}</p>
-            <p class="badge bg-info-subtle text-dark p-2">{{ reply.created }}</p>
+        <div class="card-header">
+            {% if reply.author %}
+            <div class="d-flex flex-row justify-content-between">
+                <p class="badge text-dark p-2">Reply by: {{ reply.author.username }}</p>
+                <p class="badge text-dark p-2">{{ reply.created }}</p>
+            </div>
+            {% else %}
+            <span>No Author</span>
+            {% endif %}
         </div>
-        {% else %}
-        <span>No Author</span>
-        {% endif %}
 
 
         <div>
