@@ -7,7 +7,7 @@ from .models import Plot, Comment, Reply
 # from django import forms # for add_plot_view
 from .forms import PlotAddForm, PlotEditForm, RegisterForm, CommentCreateForm, ReplyCreateForm
 from django.contrib import messages 
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 # from django.contrib.auth.models import User
 
@@ -162,20 +162,23 @@ def add_plot_view(request):
 @login_required
 def edit_plot_view(request, pk):
     plot = Plot.objects.get(id=pk)
-    form = PlotAddForm(instance=plot)
+    form = PlotEditForm(instance=plot)
     context = {
         "form": form,
         "plot": plot,
     }
     if request.method == "POST":
-        form = PlotEditForm(request.POST, instance=plot)
+        form = PlotEditForm(request.POST, request.FILES, instance=plot)
         if form.is_valid():
             plot = form.save(commit=False)
-            plot.user = request.user # get the logged in user
+            plot.owner = request.user   # get the logged in user
             form.save()
             messages.success(request, "Plot updated successfully")
             return redirect("profile")
     return render(request, "a_plots/edit_plot.html", context)
+
+
+
 
 
 # To delete the plot, we need to get the plot id from the URL, then get the plot from the database, and then delete it.

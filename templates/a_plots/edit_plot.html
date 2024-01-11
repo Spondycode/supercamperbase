@@ -5,7 +5,7 @@
 <div class="container">
     <h1>Edit Plot</h1>
     <div class="card p-4">
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form|crispy }}
             <input class="btn btn-primary btn-sm" type="submit" value="Update Plot Details">

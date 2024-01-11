@@ -38,26 +38,28 @@
 
 
                 <figure>
-                    {% if plot.image %}
-                    <a href="#"><img class="w-100 mb-2" src="{{ plot.image }}" alt="Plot Image"></a>
+                    {% if plot.plot_image %}
+                    <a href="#"><img class="w-100 mb-2" src="{{ plot.plot_image.url }}" alt="Plot Image"></a>
                     {% else %}
                     <a href="#"><img class="w-100 mb-2" src="{% static 'images/default.jpg' %}" alt="Default image"></a>
                     {% endif %}
                 </figure>
 
-
+                
+                
                 <p class="text-truncate"><strong>Description:</strong> {{ plot.description }}</p>
-
+                
                 <p><strong>Campsite:</strong> {{ plot.campsite }}</p>
                 <p><strong>Price Per Night:</strong> {{ plot.price }}</p>
                 <p><strong>Country:</strong> {{ plot.country }}</p>
-
+                
                 {% if plot.what3words is not None %}
                 <p><strong>What3Words:</strong> <a href="{{ plot.what3words }}"> Get Directions</a> </p>
                 <p class="p-3">Here is a precise what3words address, made of 3 random words. Every 3 metre square in
                     the world has its own unique what3words address.</p>
-                {% endif %}
-
+                    {% endif %}
+                    
+                    
 
                 {% if user != plot.owner %}
 
