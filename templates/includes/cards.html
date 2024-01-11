@@ -70,17 +70,16 @@
                             </h5>
                         </div>
                     </div>
-
                         {% if user.is_authenticated and user != plot.author %}
-                            <div class="d-flex justify-content-between mx-4 ">
-                                <a class="btn btn-sm btn-outline-danger" href="">Report</a>
+                    <div class="d-flex justify-content-between mx-4 ">
+                        <a class="btn btn-sm btn-outline-danger" href="">Report</a>
                         
                         {% if user in plot.likes.all %}
                             {% else %}
-                            <a class="btn btn-sm btn-secondary" href="{% url 'like_plot' plot.id %}">Add a Like</a>
+                        <a class="btn btn-sm btn-secondary" href="{% url 'like_plot' plot.id %}">Add a Like</a>
                         {% endif %}
                             
-                            </div>
+                    </div>
                     {% endif %}
                     
 

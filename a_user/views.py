@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 from django.contrib import messages
 from a_plot.views import Plot
-from .forms import ProfileAddForm, ProfileEditForm
+from .forms import ProfileAddForm
 from django.contrib.auth.decorators import login_required   
 
 
@@ -33,13 +33,13 @@ def profile_view(request):
 def profile_edit_view(request):
     if request.user.is_authenticated:
         profile = request.user.profile
-        form = ProfileEditForm(instance=profile)
+        form = ProfileAddForm(instance=profile)
         context = {
             "form": form,
             "profile": profile,
         }
         if request.method == "POST":
-            form = ProfileEditForm(request.POST, request.FILES, instance=profile)
+            form = ProfileAddForm(request.POST, request.FILES, instance=profile)
             if form.is_valid():
                 form.save()
                 messages.success(request, "Profile updated successfully")
