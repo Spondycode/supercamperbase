@@ -109,6 +109,7 @@ class Plot(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     season = models.CharField(max_length=100, choices=SEASONS, default="Mid", blank=True, null=True)
     image = models.URLField(blank=True, null=True)
+    # plot_image = models.ImageField(upload_to="photos/%Y/%m/%d/", blank=True, null=True)
     plot = models.CharField(max_length=100)
     likes = models.ManyToManyField("auth.User", related_name="likedplots", through="LikedPlot")
     categories = models.CharField(max_length=25, choices=CATEGORIES, default=1)
