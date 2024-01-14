@@ -12,7 +12,7 @@
           <div class="card-body text-center">
             <h3 class="text-center"> <i class="bi bi-emoji-sunglasses text-primary"></i> -
               {{ profile.realname }}'s Profile</h3>
-            <div>{{ profile.user.username }} - {{ profile.nationality }}</div>
+            
             {% if profile.image %}
 
             <img class="w-50" src="{{ user.profile.image.url }}" alt="avatar">
@@ -37,6 +37,7 @@
 
 
             <p class="text-center py-3">Super Camper member since - {{ profile.created }}</p>
+            <div>{{ profile.user.username }} - {{ profile.nationality }}</div>
 
             <div class="container text-center">
               <a class="btn btn-outline-warning" href="{% url 'profile-edit' %}">Edit Profile</a>

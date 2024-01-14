@@ -23,15 +23,13 @@
                             {% endif %}
 
                    <!-- Image for the plot -->
-                   <figure>
+                   {% if plot.plot_image %}
 
-                    {% if plot.image %}
-
-                    <a href="{% url 'show_plot' plot.id %}"><img class="w-100" src="{{ plot.image }}" alt=""></a>
-                    {% else %}
-                    <a href="{% url 'show_plot' plot.id %}"><img class="w-100" src="{% static 'images/default.jpg' %}" alt="Default image"></a>
-                    {% endif %}
-                </figure>
+                   <a href="{% url 'show_plot' plot.id %}"><img class="w-100" src="{{ plot.plot_image.url }}" alt=""></a>
+                   {% else %}
+                   <a href="{% url 'show_plot' plot.id %}"><img class="w-100" src="{% static 'images/default.jpg' %}" alt="Default image"></a>
+                   {% endif %}
+               </figure>
 
                             <p class="text-truncate"><strong>Description:</strong> {{ plot.description }}</p>
                             <ul>

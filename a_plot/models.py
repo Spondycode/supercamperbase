@@ -186,6 +186,7 @@ REPORT_REASONS = (
     ("Off Topic", "Off Topic"),
     ("Spam", "Spam"),
     ("Sexual content", "Sexual content"),
+    ("Nudity", "Nudity"),
     ("Breaks Rules", "Breaks Rules"),
     ("Other", "Other"),
 )    
