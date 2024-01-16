@@ -18,15 +18,15 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'add_plot' %}">Add Plot</a>
         </li>
+
+
+
         <li class="nav-item">
           <a class="nav-link" href="{% url 'logout' %}">Logout</a>
         </li>
-        <li class="nav-link"> <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/person-male.png"
-            alt="person-male" /> User {{ user.username }}
-        </li>
 
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle bs- " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Profile
           </a>
           <ul class="dropdown-menu">
@@ -52,6 +52,12 @@
         </li>
         {% endif %}
 
+        <li class="nav-link bg-info py-1 rounded-3"> 
+          <a href="{% url 'profile' %}">
+            <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/person-male.png"
+                alt="person-male" /> <strong>User:</strong> {{ user.username }}
+          </a>
+        </li>
       </ul>
     </div>
   </div>

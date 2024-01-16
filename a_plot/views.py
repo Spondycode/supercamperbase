@@ -2,14 +2,15 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
-from .models import Plot, Comment, Reply    
+from .models import Plot, Comment, Reply
+from a_user.models import Profile  
 # from django.forms import ModelForm
 # from django import forms # for add_plot_view
 from .forms import PlotAddForm, PlotEditForm, RegisterForm, CommentCreateForm, ReplyCreateForm
 from django.contrib import messages 
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
-# from django.contrib.auth.models import User
+from django.contrib.auth.models import User
 
 
 
@@ -142,6 +143,7 @@ def add_plot_view(request):
         if form.is_valid():
             plot = form.save(commit=False)
             plot.owner = request.user # get the logged in user
+            
             form.save()
             return HttpResponseRedirect("/?submitted=True")
         else:
@@ -237,7 +239,7 @@ def search_plots_view(request):
             "search": search
         }
         return render(request, "a_plots/plot_search.html", context)
-        plots = Plot.objects.filter(title__icontains=query)
+        plots = Plot.objects.filter(title__icontains=query)  # noqa: F821
         
     else:
         plots = Plot.objects.all()
@@ -257,7 +259,7 @@ def search_categories_view(request):
             "search": search
         }
         return render(request, "a_plots/category_search.html", context)
-        plots = Plot.objects.filter(categories__icontains=query)
+        plots = Plot.objects.filter(categories__icontains=query)  # noqa: F821
     else:
         plots = Plot.objects.all()
     context = {
@@ -322,7 +324,7 @@ def search_countries_view(request):
             "search": search
         }
         return render(request, "a_plots/country_search.html", context)
-        plots = Plot.objects.filter(countries__icontains=query)
+        plots = Plot.objects.filter(countries__icontains=query)  # noqa: F821
     else:
         plots = Plot.objects.all()
     context = {
