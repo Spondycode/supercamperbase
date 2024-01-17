@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import plot_view, add_plot_view, delete_plot_view, edit_plot_view, my_plots_view, like_plot, like_comment, search_plots_view, search_categories_view, campsite_plots_view, wild_plots_view, official_plots_view, search_countries_view, country_view, comment_sent, delete_comment, reply_sent, delete_reply, questions_view
+from .views import plot_view, add_plot_view, delete_plot_view, edit_plot_view, my_plots_view, like_plot, like_comment, search_plots_view, search_categories_view, campsite_plots_view, wild_plots_view, official_plots_view, search_countries_view, country_view, comment_sent, delete_comment, reply_sent, delete_reply, questions_view, report_view
 
 urlpatterns = [
     path("show_plot/<plot_id>/", plot_view, name="show_plot"),
@@ -22,5 +22,6 @@ urlpatterns = [
     path("replysent/<pk>/", reply_sent, name="reply_sent"),
     path("delete_reply/<pk>/", delete_reply, name="delete_reply"),
     path("questions/", questions_view, name="questions"),
+    path("report/<pk>/", report_view, name="report"),
     
 ]

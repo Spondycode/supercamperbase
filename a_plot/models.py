@@ -105,7 +105,7 @@ class Plot(models.Model):
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     season = models.CharField(max_length=100, choices=SEASONS, default="Mid", blank=True, null=True)
-    image = models.URLField(blank=True, null=True)
+    # image = models.URLField(blank=True, null=True)
     plot_image = models.ImageField(upload_to="photos/", blank=True, null=True)
     plot = models.CharField(max_length=100)
     likes = models.ManyToManyField("auth.User", related_name="likedplots", through="LikedPlot")
@@ -115,6 +115,8 @@ class Plot(models.Model):
     countries = models.CharField(max_length=100, choices=COUNTRIES, default="Spain")
     list_date = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey("auth.User", on_delete=models.SET_NULL, null=True, related_name="plots")
+    approved = models.BooleanField('Approved', default=True)
+    reported = models.ForeignKey('ReportPlot',on_delete=models.SET_NULL, null=True, blank=True, related_name="reports")
     id = models.CharField(max_length=100, default=uuid.uuid4, unique=True, primary_key=True, editable=False)
 
     def __str__(self):
@@ -192,7 +194,6 @@ REPORT_REASONS = (
 )    
         
 class ReportPlot(models.Model):
-    plot = models.ForeignKey(Plot, on_delete=models.CASCADE)
     user = models.ForeignKey("auth.User", on_delete=models.CASCADE)
     reason = models.CharField(max_length=100, choices=REPORT_REASONS, default="Off Topic")
     report_count = models.IntegerField(default=1)

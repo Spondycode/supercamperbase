@@ -1,1 +1,34 @@
-<h2>Report Plot</h2>
+{% extends 'base.html' %} {% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h2 class="text-center">Report Plot</h2>
+
+<div class="container">
+    <div class="card bg-info-subtle shadow  px-md-5 ml-3 mb-4">
+        <h3 class="text-center mt-4">What was the problem with the plot?</h3>
+        {{ plot.title }}<br>
+        {{ plot.description }}<br>
+        {{ plot.owner }}
+
+        reported by {{ user.username }}
+    
+        {% if submitted %}
+        Your Plot was reported successfully
+        {% else %}
+    
+        <form method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <div class="d-grid d-flex gap-2 mb-4">
+                <input type="submit" value="Submit" class="btn btn-primary ">
+                <a class="btn btn-secondary" href="{{ request.META.HTTP_REFERER }}">Cancel</a>
+            </div>
+        </form>
+    
+    
+    
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

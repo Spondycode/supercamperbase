@@ -1,5 +1,5 @@
 from django import forms    
-from .models import Plot, Comment, Reply
+from .models import Plot, Comment, Reply, ReportPlot
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User 
@@ -17,6 +17,14 @@ class PlotEditForm(ModelForm):
     class Meta:
         model = Plot
         fields = ["title", "description", "price", 'season', "plot", "what3words", "campsite", "countries", "categories", "plot_image"]
+
+
+class PlotReportForm(ModelForm):
+    
+    class Meta:
+        model = ReportPlot
+        fields = ["reason"]
+        
         
         
         
