@@ -2,15 +2,16 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
-from .models import Plot, Comment, Reply
+from .models import Plot, Comment, Reply, ReportPlot
 # from a_user.models import Profile
 # from django.forms import ModelForm
 # from django import forms # for add_plot_view
-from .forms import PlotAddForm, PlotEditForm, RegisterForm, CommentCreateForm, ReplyCreateForm, PlotReportForm
+from .forms import PlotAddForm, PlotEditForm, RegisterForm, CommentCreateForm, ReplyCreateForm, PlotReportForm, PlotEditForm2
 from django.contrib import messages 
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 # from django.contrib.auth.models import User
+
 
 
 
@@ -180,27 +181,26 @@ def edit_plot_view(request, pk):
     return render(request, "a_plots/edit_plot.html", context)
 
 
-# @login_required
-# def report_view(request, pk):
-#     plot = Plot.objects.get(id=pk)
-#     form = PlotReportForm(instance=plot)
-#     context = {
-#         "form": form,
-#         "plot": plot,
-#     }
-#     if request.method == "POST":
-#         form = PlotReportForm(request.POST, instance=plot)
-        
-#         if form.is_valid():
-#             plot = form.save(commit=False)
-#             plot.approved = False
-#             reportplot = 
-#             plot.save()  # Save the plot object after setting approved to False
-#             messages.success(request, "Plot reported successfully")
-#             return redirect("home")
-#     return render(request, "home", context)
-
-# write a view to report a plot change the approved to False, update all the Report plot model at the same time
+@login_required
+def report_plot_view(request, pk):
+    plot = Plot.objects.get(id=pk)
+    form1 = PlotReportForm(instance=plot)
+    form2 = PlotEditForm2(instance=plot)
+    context = {
+        "form1": form1,
+        "form2": form2,
+        "plot": plot,
+    }
+    if request.method == "POST":
+        form1 = PlotReportForm(request.POST, request.FILES, instance=plot)
+        if form1.is_valid():
+            plot = form1.save(commit=False)
+            plot.owner = request.user
+            form1.save()
+            form2.save()
+            messages.success(request, "Plot reported successfully")
+            return redirect("home")
+    return render(request, "a_plots/report_plot.html", context)
 
 
 

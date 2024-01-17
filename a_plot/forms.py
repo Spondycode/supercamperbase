@@ -19,6 +19,12 @@ class PlotEditForm(ModelForm):
         fields = ["title", "description", "price", 'season', "plot", "what3words", "campsite", "countries", "categories", "plot_image"]
 
 
+class PlotEditForm2(ModelForm):
+    class Meta:
+        model = Plot
+        fields = ["approved" "reported"]
+
+
 class PlotReportForm(ModelForm):
     
     class Meta:
