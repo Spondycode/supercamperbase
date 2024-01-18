@@ -1,0 +1,39 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+  <h1>Check the Reported Posts</h1>
+  <br /><br />
+
+<form action="" method="POST">
+{% csrf_token %}
+
+</form>
+
+  <table class="table table-striped table hover table-bordered">
+    <thead>
+      <tr>
+        <th>Plot Title</th>
+        <th>Plot Owner</th>
+        <th>Reported by</th>
+
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        {% for plot in plot_list %}
+        <td>{{ plot.title }}</td>
+        <td>{{ plot.owner }}</td>
+        <td><a href="">{{ plot.reported_by }}</a></td>
+        
+      </tr>
+      <br />
+
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+
+</div>
+
+{% endblock content %}

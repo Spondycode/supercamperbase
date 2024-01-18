@@ -24,6 +24,14 @@
         <li class="nav-link"> <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/person-male.png"
             alt="person-male" /> User {{ user.username }}
         </li>
+        
+        {% if user.is_superuser %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'check_reports' %}">Reports</a>
+        </li>
+          
+        {% endif %}
+          
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

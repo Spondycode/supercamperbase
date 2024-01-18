@@ -7,7 +7,7 @@ class ProfileAddForm(ModelForm):
     class Meta:
         model = Profile
         # use the fields from the Profile model
-        exclude = ['user']
+        exclude = ['user', 'level', 'plot_reports', 'numplots']
         
         labels = {
             "realname": "Name",

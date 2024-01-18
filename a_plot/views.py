@@ -2,14 +2,134 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
-from .models import Plot, Comment, Reply    
-# from django.forms import ModelForm
-# from django import forms # for add_plot_view
-from .forms import PlotAddForm, PlotEditForm, RegisterForm, CommentCreateForm, ReplyCreateForm
+from .models import Plot, Comment, Reply
+from .forms import PlotAddForm, PlotEditForm, RegisterForm, CommentCreateForm, ReplyCreateForm, PlotReportForm
 from django.contrib import messages 
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+
 # from django.contrib.auth.models import User
+
+
+# Main FUNCTIONS For the app for Plots
+# Add a plot
+@login_required
+def add_plot_view(request):
+    submitted = False
+    if request.method == "POST":
+        form = PlotAddForm(request.POST, request.FILES)
+        if form.is_valid():
+            plot = form.save(commit=False)
+            plot.owner = request.user # get the logged in user
+            form.save()
+            return HttpResponseRedirect("/?submitted=True")
+        else:
+            print(form.errors)
+    else:
+        form = PlotAddForm()  # Create an instance of PlotAddForm
+        if "submitted" in request.GET:
+            submitted = True
+    context = {
+        "form": form,
+        "submitted": submitted,
+    }
+    print(form.errors)
+    return render(request, "a_plots/add_plot.html", context)
+
+
+# To edit a plot, we need to get the plot id from the URL, then get the plot from the database, and then edit it.
+@login_required
+def edit_plot_view(request, pk):
+    plot = Plot.objects.get(id=pk)
+    form = PlotEditForm(instance=plot)
+    context = {
+        "form": form,
+        "plot": plot,
+    }
+    if request.method == "POST":
+        form = PlotEditForm(request.POST, request.FILES, instance=plot)
+        if form.is_valid():
+            plot = form.save(commit=False)
+            plot.owner = request.user   # get the logged in user
+            form.save()
+            messages.success(request, "Plot updated successfully")
+            return redirect("profile")
+    return render(request, "a_plots/edit_plot.html", context)
+
+
+
+# REPORT A PLOT
+@login_required
+def report_plot_view(request, pk):
+    plot = Plot.objects.get(id=pk)
+    form = PlotReportForm(instance=plot)
+    
+    context = {
+        "form": form,
+        "plot": plot,
+       
+    }
+    if request.method == "POST":
+        form = PlotReportForm(request.POST, request.FILES, instance=plot)
+        if form.is_valid():
+            plot = form.save(commit=False)
+            user = request.user.id # get the logged in user
+            plot.approved = False
+            plot.reported_by = user
+            form.save()
+            messages.success(request, "Plot reported successfully")
+            return redirect("home")
+    return render(request, "a_plots/report_plot.html", context)
+
+
+
+
+
+# To delete the plot, we need to get the plot id from the URL, then get the plot from the database, and then delete it.
+@login_required
+def delete_plot_view(request, pk):
+    plot = Plot.objects.get(id=pk)
+    context = {
+        "plot": plot,
+    }
+    
+    if request.method == "POST":
+        plot.delete()
+        messages.success(request, "Plot deleted successfully")
+        return redirect("home")
+    return render(request, "a_plots/delete_plot.html", context)
+
+
+
+
+#CHECK REPORTED PLOTS
+
+def check_reports_view(request):
+    plot_list = Plot.objects.filter(approved=False)
+    
+    context = {
+        "plot_list": plot_list,
+    }
+    if request.user.is_superuser:
+        if request.method == "POST":
+            id_list = request.POST.getlist("boxes")
+            
+            for x in id_list:
+                Plot.objects.filter(pk=int(x)).update(approved=True)
+            
+            messages.success(request, ("Reported Plots Checked Successfully"))
+            return redirect("home")
+        else:
+            
+            return render(request, "a_plots/check_reported.html", context)
+    else:
+        messages.success(request, "You are Not Authorised")
+        return redirect("home")
+    
+    return render(request, "a_plots/check_reported.html", context)
+
+
+
 
 
 
@@ -66,6 +186,10 @@ def plot_view(request, plot_id):
     return render(request, "a_plots/plotpage.html", context)
 
 
+
+
+
+# COMMENTS AND REPLIES
 
 # Comment sent function
 @login_required
@@ -132,68 +256,6 @@ def delete_reply(request, pk):
 
 
 
-
-# Add a plot
-@login_required
-def add_plot_view(request):
-    submitted = False
-    if request.method == "POST":
-        form = PlotAddForm(request.POST, request.FILES)
-        if form.is_valid():
-            plot = form.save(commit=False)
-            plot.owner = request.user # get the logged in user
-            form.save()
-            return HttpResponseRedirect("/?submitted=True")
-        else:
-            print(form.errors)
-    else:
-        form = PlotAddForm()  # Create an instance of PlotAddForm
-        if "submitted" in request.GET:
-            submitted = True
-    context = {
-        "form": form,
-        "submitted": submitted,
-    }
-    print(form.errors)
-    return render(request, "a_plots/add_plot.html", context)
-
-
-# To edit a plot, we need to get the plot id from the URL, then get the plot from the database, and then edit it.
-@login_required
-def edit_plot_view(request, pk):
-    plot = Plot.objects.get(id=pk)
-    form = PlotEditForm(instance=plot)
-    context = {
-        "form": form,
-        "plot": plot,
-    }
-    if request.method == "POST":
-        form = PlotEditForm(request.POST, request.FILES, instance=plot)
-        if form.is_valid():
-            plot = form.save(commit=False)
-            plot.owner = request.user   # get the logged in user
-            form.save()
-            messages.success(request, "Plot updated successfully")
-            return redirect("profile")
-    return render(request, "a_plots/edit_plot.html", context)
-
-
-
-
-
-# To delete the plot, we need to get the plot id from the URL, then get the plot from the database, and then delete it.
-@login_required
-def delete_plot_view(request, pk):
-    plot = Plot.objects.get(id=pk)
-    context = {
-        "plot": plot,
-    }
-    
-    if request.method == "POST":
-        plot.delete()
-        messages.success(request, "Plot deleted successfully")
-        return redirect("home")
-    return render(request, "a_plots/delete_plot.html", context)
 
 
 

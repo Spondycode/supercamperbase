@@ -74,6 +74,15 @@ SEASONS = (
     ("High", "High"),  
 )
 
+REPORT_REASONS = (
+    ("Off Topic", "Off Topic"),
+    ("Spam", "Spam"),
+    ("Sexual content", "Sexual content"),
+    ("Nudity", "Nudity"),
+    ("Breaks Rules", "Breaks Rules"),
+    ("Other", "Other"),
+)   
+
 
 class Country(models.Model):
     name = models.CharField(max_length=100)
@@ -105,16 +114,18 @@ class Plot(models.Model):
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     season = models.CharField(max_length=100, choices=SEASONS, default="Mid", blank=True, null=True)
-    # image = models.URLField(blank=True, null=True)
     plot_image = models.ImageField(upload_to="photos/", blank=True, null=True)
     plot = models.CharField(max_length=100)
     likes = models.ManyToManyField("auth.User", related_name="likedplots", through="LikedPlot")
     categories = models.CharField(max_length=25, choices=CATEGORIES, default=1)
     what3words = models.URLField(blank=True, null=True)
-    campsite = models.CharField(max_length=100, blank=True, null=True)
+    campsite = models.CharField(max_length=200, blank=True, null=True)
     countries = models.CharField(max_length=100, choices=COUNTRIES, default="Spain")
     list_date = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey("auth.User", on_delete=models.SET_NULL, null=True, related_name="plots")
+    approved = models.BooleanField(default=True)
+    reported_by = models.CharField(max_length = 150, null=True, blank=True)
+    reason = models.CharField(max_length=100, choices=REPORT_REASONS, default="Off Topic")
     id = models.CharField(max_length=100, default=uuid.uuid4, unique=True, primary_key=True, editable=False)
 
     def __str__(self):
@@ -182,22 +193,5 @@ class Reply(models.Model):
     class Meta:
         ordering = ["-created"]
         
-REPORT_REASONS = (
-    ("Off Topic", "Off Topic"),
-    ("Spam", "Spam"),
-    ("Sexual content", "Sexual content"),
-    ("Nudity", "Nudity"),
-    ("Breaks Rules", "Breaks Rules"),
-    ("Other", "Other"),
-)    
-        
-class ReportPlot(models.Model):
-    plot = models.ForeignKey(Plot, on_delete=models.CASCADE)
-    user = models.ForeignKey("auth.User", on_delete=models.CASCADE)
-    reason = models.CharField(max_length=100, choices=REPORT_REASONS, default="Off Topic")
-    report_count = models.IntegerField(default=1)
-    created = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=100, default="pending")
+ 
     
-    def __str__(self):
-        return f'{self.user.username} : {self.plot.title}'

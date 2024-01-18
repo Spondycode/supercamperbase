@@ -1,1 +1,20 @@
-<h2>Report Plot</h2>
+
+
+{% extends 'base2.html' %}
+<!-- {% load static %} -->
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+    <h1>Report Plot</h1>
+    <div class="card p-4">
+        <h3>What was wrong with it?</h3>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input class="btn btn-primary btn-sm" type="submit" value="Update Plot Details">
+            <a class="btn btn-secondary btn-sm" href="{{ request.META.HTTP_REFERER }}">Cancel</a>
+        </form>
+<h2>{{ user.id }}</h2>
+    </div>
+</div>
+{% endblock content %}
