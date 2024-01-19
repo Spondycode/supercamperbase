@@ -13,6 +13,7 @@ MODES = (
     ("Small Caravan", "Small Caravan"),
     ("Large Caravan", "Large Caravan"),
     ("Trailer Tent", "Trailer Tent"),
+    ("Cabin/Mobile Home", "Cabin/Mobile Home"),
     ("Under the Stars", "Under the Stars"),
 )
 
