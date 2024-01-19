@@ -21,7 +21,7 @@
     <tbody>
       <tr>
         {% for plot in plot_list %}
-        <td>{{ plot.title }}</td>
+        <td><a href="{% url 'show_plot' plot.id %}">{{ plot.title }}</a></td>
         <td>{{ plot.owner }}</td>
         <td><a href="">{{ plot.reported_by }}</a></td>
         
@@ -32,6 +32,9 @@
     </tbody>
   </table>
 
+  <h3 class="bg-secondary-subtle p-2 mt-5">A Few Stats</h3>
+  Plot Count: {{ plot_count }}<br>
+  User Count: {{ user_count }}
 
 
 </div>

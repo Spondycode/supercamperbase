@@ -7,6 +7,7 @@ from .forms import PlotAddForm, PlotEditForm, RegisterForm, CommentCreateForm, R
 from django.contrib import messages 
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 # from django.contrib.auth.models import User
 
@@ -67,7 +68,6 @@ def report_plot_view(request, pk):
     context = {
         "form": form,
         "plot": plot,
-       
     }
     if request.method == "POST":
         form = PlotReportForm(request.POST, request.FILES, instance=plot)
@@ -105,10 +105,14 @@ def delete_plot_view(request, pk):
 #CHECK REPORTED PLOTS
 
 def check_reports_view(request):
+    plot_count = Plot.objects.all().count()
+    user_count = User.objects.all().count()
     plot_list = Plot.objects.filter(approved=False)
     
     context = {
         "plot_list": plot_list,
+        "user_count": user_count,
+        "plot_count": plot_count,
     }
     if request.user.is_superuser:
         if request.method == "POST":
