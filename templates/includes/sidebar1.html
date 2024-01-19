@@ -17,6 +17,14 @@
             <div class="p-2">{% include 'includes/plotoftheweek.html' %}</div>
 
             <div class="p-2">{% include 'includes/aside2.html' %}</div>
+
+  {% if profile.level == 'Banned' %}
+    <div class="p-2">Please enjoy</div>
+    {% else %}
+    <div class="p-2"> {% include 'includes/user_info.html' %}</div>
+{% endif %}
+    
+
         </div>
     </div>
 </div>

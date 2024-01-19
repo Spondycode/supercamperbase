@@ -50,9 +50,12 @@
                         <a href="{% url 'show_plot' plot.id %}"><img class="w-100" src="{% static 'images/default.jpg' %}" alt="Default image"></a>
                         {% endif %}
                     </figure>
-
+                    {% if profile.level == 'Banned' %}
+                    <p>Please enjoy</p>
+                    {% else %}
                     <a class="btn btn-info btn-sm col" href="{% url 'show_plot' plot.id %}">
                         View Plot</a>
+                    {% endif %}
                     <hr>
                     
                     <div class="d-flex justify-content-between mx-3">

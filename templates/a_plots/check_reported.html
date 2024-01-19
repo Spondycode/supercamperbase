@@ -11,8 +11,10 @@
   <table class="table table-striped table hover table-bordered">
     <thead>
       <tr>
+        <th>Report Date</th>
         <th>Plot Title</th>
         <th>Plot Owner</th>
+        <th>Reason</th>
         <th>Reported by</th>
 
       </tr>
@@ -21,8 +23,10 @@
     <tbody>
       <tr>
         {% for plot in plot_list %}
+        <td>{{ plot.reported_date }}</td>
         <td><a href="{% url 'show_plot' plot.id %}">{{ plot.title }}</a></td>
         <td>{{ plot.owner }}</td>
+        <td>{{ plot.reason }}</td>
         <td><a href="">{{ plot.reported_by }}</a></td>
         
       </tr>

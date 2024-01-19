@@ -2,64 +2,65 @@
 <nav class="navbar navbar-expand-md bg-warning navbar-light">
   <div class="container">
     <a href="{% url 'home' %}">
-      <img class="p-1" width="64" height="64" src="{% static 'images/tent-logo.png' %}" alt="external-tent-camping" />
+      <img
+        class="p-1"
+        width="64"
+        height="64"
+        src="{% static 'images/tent-logo.png' %}"
+        alt="external-tent-camping"
+      />
     </a>
-    <a class="navbar-brand" href="{% url 'home' %}">Super Camper</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+    <a class="navbar-brand" href="{% url 'home' %}">Super Camper - {{ user.username }}</a>
+
+<p></p>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#collapsibleNavbar"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
       <ul class="navbar-nav px-4 ms-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'questions' %}">FAQ</a>
-        </li>
 
+        
         {% if user.is_authenticated %}
+          
+        
         <li class="nav-item">
           <a class="nav-link" href="{% url 'add_plot' %}">Add Plot</a>
         </li>
+        
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-        </li>
-        <li class="nav-link"> <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/person-male.png"
-            alt="person-male" /> User {{ user.username }}
+          <a class="nav-link" href="{% url 'profile' %} ">Profile</a>
         </li>
         
+        
+        <li class="nav-item ">
+          <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+        </li>
+        
+
         {% if user.is_superuser %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'check_reports' %}">Reports</a>
         </li>
           
         {% endif %}
-          
 
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Profile
-          </a>
-          <ul class="dropdown-menu">
-            {% if user.profile %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'profile' %} ">Profile</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'profile-edit' %} ">Edit Profile</a>
-            </li>
-            {% else %}
-            <li>
-              <a class="dropdown-item" href="{% url 'profile-create' %}">Create Profile</a>
-            </li>
-            {% endif %}
-          </ul>
-          {% else %}
+
+        {% else %}
+        
         <li class="nav-item">
           <a class="nav-link" href="{% url 'login' %}">Login</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'register' %}">Register</a>
         </li>
+        
         {% endif %}
-
       </ul>
     </div>
   </div>

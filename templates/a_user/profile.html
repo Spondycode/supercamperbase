@@ -1,21 +1,19 @@
-{% extends 'base2.html' %} {% load static %}
-{% block content %}
-
-
+{% extends 'base2.html' %} {% load static %} {% block content %}
 
 <body>
-  <div class="container-fluid ">
-
+  <div class="container-fluid">
     <div class="row">
       <div class="container my-4 col-md-9">
         <div class="card">
           <div class="card-body text-center">
-            <h3 class="text-center"> <i class="bi bi-emoji-sunglasses text-primary"></i> -
-              {{ profile.realname }}'s Profile</h3>
-            
+            <h3 class="text-center">
+              <i class="bi bi-emoji-sunglasses text-primary"></i> - 
+              {{ profile.realname }}'s Profile
+            </h3>
+
             {% if profile.image %}
 
-            <img class="w-50" src="{{ user.profile.image.url }}" alt="avatar">
+            <img class="w-50" src="{{ user.profile.image.url }}" alt="avatar" />
             {% else %}
             <h3>Put an image here</h3>
             {% endif %}
@@ -25,56 +23,73 @@
             {% if profile.campermode %}
             <p>Often I camp in a {{ profile.campermode }}</p>
             {% else %}
-            <p>Lying on a blow up mattress looking at the stars is the best form of camping</p>
-            {% endif %}
-
+            <p>
+              Lying on a blow up mattress looking at the stars is the best form
+              of camping
+            </p>
+            {% endif %} 
+            
             {% if profile.camperstory %}
             <p class="text-center">{{ profile.camperstory }}</p>
             {% else %}
-            <p>Don't forget to tell us about your experiences of camping over the years. Or is this the first time out
-              and you forgot to bring the sleeping bag?</p>
+            <p>
+              Don't forget to tell us about your experiences of camping over the
+              years. Or is this the first time out and you forgot to bring the
+              sleeping bag?
+            </p>
             {% endif %}
 
-
-            <p class="text-center py-3">Super Camper member since - {{ profile.created }}</p>
+            <p class="text-center py-3">
+              Super Camper member since - {{ profile.created }}
+            </p>
             <div>{{ profile.user.username }} - {{ profile.nationality }}</div>
 
+            <p>{{ profile.level }}</p>
+
             <div class="container text-center">
-              <a class="btn btn-outline-warning" href="{% url 'profile-edit' %}">Edit Profile</a>
-              <a class="btn btn-outline-info" href="/password_change">Password Change</a>
-              <a class="btn btn-outline-primary" href="{% url 'home' %}">Home Page</a>
+              {% if profile.level == 'Banned' %}
+              <p>
+                You can not post here due to previous posts made which were
+                reported to the Admin
+              </p>
+              {% else %}
+              <a class="btn btn-outline-warning" href="{% url 'profile-edit' %}"
+                >Edit Profile</a
+              >
+              <a class="btn btn-outline-info" href="/password_change"
+                >Password Change</a
+              >
+              {% endif %}
+
+              <a class="btn btn-outline-primary" href="{% url 'home' %}"
+                >Home Page</a
+              >
             </div>
           </div>
         </div>
       </div>
-
     </div>
 
     <div class="row">
       {% include 'includes/cards.html' %}
 
-      <div class=" col-lg-3 ">
-        <div class=" row row-cols-md">
-            <div class="col ">
-
-              {% include 'includes/sidebar1.html' %}
-<br>
-<br>
-<br>
-<br>
-              {% include 'includes/user_info.html' %}
-            </div>
+      <div class="col-lg-3">
+        <div class="row row-cols-md">
+          <div class="col">
+            {% include 'includes/sidebar1.html' %}
+            <br />
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <br>
-  <br>
+  <br />
+  <br />
 
   <div>{% include 'includes/showcase.html' %}</div>
-  
-<br>
-<br>
+
+  <br />
+  <br />
   {% endblock %}
 </body>

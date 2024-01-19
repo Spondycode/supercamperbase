@@ -126,6 +126,7 @@ class Plot(models.Model):
     approved = models.BooleanField(default=True)
     reported_by = models.CharField(max_length = 150, null=True, blank=True)
     reason = models.CharField(max_length=100, choices=REPORT_REASONS, default="Off Topic")
+    reported_date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     id = models.CharField(max_length=100, default=uuid.uuid4, unique=True, primary_key=True, editable=False)
 
     def __str__(self):

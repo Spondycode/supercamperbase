@@ -120,6 +120,11 @@
                     <a class="btn btn-outline-info col" href="{% url 'home' %}">Home</a>
 
                     {% endif %}
+                    
+                    {% if user.is_superuser %}
+                    <a class="btn btn-danger col" href="{% url 'delete_plot' plot.id %}">Delete Plot</a>
+                    {% endif %}
+                        
                 </div>
             </div>
             <br>

@@ -9,4 +9,13 @@
     </div>
     <a class="col mt-1 btn" href="{% url 'about' %}">About</a>
 
+    {% if user.is_superuser %}
+      <a class="col" href="{% url 'check_reports' %}">Reports</a>
+
+    {% endif %}
+
+    
+      <a class="col" href="{% url 'questions' %}">FAQ</a>
+    
+
   </footer>
