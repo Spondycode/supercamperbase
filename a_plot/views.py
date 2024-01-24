@@ -177,7 +177,6 @@ def questions_view(request):
 
 
 
-
 def plot_view(request, plot_id):
     plot = Plot.objects.get(id=plot_id)
     commentform = CommentCreateForm()
